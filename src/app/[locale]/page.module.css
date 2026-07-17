@@ -1,0 +1,183 @@
+.hero {
+  min-height: calc(100svh - 4.5rem);
+  padding: clamp(3rem, 7vw, 6rem) var(--page-gutter) 0;
+}
+
+.heroGrid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: minmax(0, 7fr) minmax(17rem, 5fr);
+}
+
+.heroCopy {
+  max-width: 68rem;
+}
+
+.eyebrow {
+  color: var(--color-signal-red);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 900;
+  letter-spacing: 0;
+  margin: 0 0 1.3rem;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-size: clamp(3.2rem, 8.8vw, 8rem);
+  line-height: 0.88;
+  margin: 0;
+  max-width: 10ch;
+}
+
+.subtitle {
+  color: var(--color-muted);
+  font-size: clamp(1.08rem, 2vw, 1.45rem);
+  line-height: 1.55;
+  margin: 1.6rem 0 0;
+  max-width: 47rem;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.systemPanel {
+  align-self: end;
+  background:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+    var(--color-surface);
+  background-size: 18px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  min-height: 24rem;
+  padding: 1rem;
+}
+
+.panelIndex {
+  color: var(--color-signal-blue);
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 900;
+  margin-bottom: 6rem;
+}
+
+.systemPanel dl {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+}
+
+.systemPanel div {
+  align-items: baseline;
+  border-top: 1px solid var(--color-border);
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 5rem 1fr;
+  padding-top: 0.7rem;
+}
+
+.systemPanel dt {
+  color: var(--color-muted);
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.systemPanel dd {
+  font-size: var(--font-size-lg);
+  font-weight: 850;
+  margin: 0;
+}
+
+.proofStrip {
+  border-top: 1px solid var(--color-border);
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-top: clamp(3rem, 8vw, 7rem);
+}
+
+.proofStrip span {
+  border-right: 1px solid var(--color-border);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  font-weight: 900;
+  min-height: 5rem;
+  padding: 1rem 0.8rem;
+}
+
+.proofStrip span:first-child {
+  color: var(--color-signal-red);
+}
+
+.sectionIntro {
+  color: var(--color-muted);
+  font-size: var(--font-size-lg);
+  line-height: 1.55;
+  margin: 0 0 1.4rem;
+  max-width: 48rem;
+}
+
+.projectGrid {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.contactBand {
+  align-items: center;
+  background: var(--color-ink);
+  border-radius: var(--radius-md);
+  color: var(--color-ink-inverse);
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: clamp(1.2rem, 3vw, 2rem);
+}
+
+.contactBand h3 {
+  font-size: clamp(1.5rem, 3vw, 2.6rem);
+  line-height: 1;
+  margin: 0 0 0.8rem;
+  max-width: 16ch;
+}
+
+.contactBand p {
+  color: color-mix(in srgb, var(--color-ink-inverse) 72%, transparent);
+  line-height: 1.55;
+  margin: 0;
+  max-width: 42rem;
+}
+
+.contactActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: flex-end;
+}
+
+@media (max-width: 900px) {
+  .heroGrid,
+  .contactBand {
+    grid-template-columns: 1fr;
+  }
+
+  .systemPanel {
+    min-height: 18rem;
+  }
+
+  .proofStrip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .projectGrid {
+    grid-template-columns: 1fr;
+  }
+}

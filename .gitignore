@@ -5,13 +5,15 @@
 .env.local
 
 # Node modules
-node_modules
+node_modules/
 
 # Build output
 build
 dist
 out
-.next
+.next/
+.content-collections/
+tsconfig.tsbuildinfo
 
 # IDEs
 .vscode

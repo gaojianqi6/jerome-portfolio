@@ -1,0 +1,118 @@
+.header {
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(9rem, 1fr) auto minmax(12rem, 1fr);
+  min-height: 4.5rem;
+  padding: 0 var(--page-gutter);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+}
+
+.header::before {
+  background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+  backdrop-filter: blur(18px);
+  content: "";
+  inset: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.brand {
+  align-items: center;
+  color: var(--color-ink);
+  display: inline-flex;
+  font-weight: 800;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.index {
+  color: var(--color-signal-red);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+}
+
+.nav {
+  align-items: center;
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+}
+
+.nav a,
+.locales a {
+  color: var(--color-muted);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav a:hover,
+.locales a:hover {
+  color: var(--color-ink);
+}
+
+.actions {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.locales {
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  padding: 0.2rem;
+}
+
+.locales a {
+  border-radius: calc(var(--radius-sm) - 2px);
+  line-height: 1;
+  padding: 0.48rem 0.58rem;
+}
+
+.activeLocale {
+  background: var(--color-ink);
+  color: var(--color-ink-inverse) !important;
+}
+
+.iconLink {
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-ink);
+  display: inline-flex;
+  height: 2.3rem;
+  justify-content: center;
+  transition:
+    background var(--motion-fast) var(--ease-standard),
+    transform var(--motion-fast) var(--ease-standard);
+  width: 2.3rem;
+}
+
+.iconLink:hover {
+  background: var(--color-surface);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 780px) {
+  .header {
+    grid-template-columns: 1fr;
+    padding-bottom: 0.9rem;
+    padding-top: 0.9rem;
+  }
+
+  .nav {
+    justify-content: flex-start;
+    order: 3;
+  }
+
+  .actions {
+    justify-content: flex-start;
+  }
+}

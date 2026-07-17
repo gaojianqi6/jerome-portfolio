@@ -1,0 +1,16 @@
+.footer {
+  align-items: center;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: var(--font-size-sm);
+  gap: 0.8rem;
+  justify-content: space-between;
+  padding: 2rem var(--page-gutter);
+}
+
+.footer a {
+  color: var(--color-ink);
+  font-weight: 800;
+}

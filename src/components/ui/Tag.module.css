@@ -1,0 +1,28 @@
+.tag {
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  color: var(--color-muted);
+  display: inline-flex;
+  font-size: var(--font-size-xs);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1;
+  min-height: 1.8rem;
+  padding: 0 0.62rem;
+}
+
+.red {
+  border-color: color-mix(in srgb, var(--color-signal-red) 45%, var(--color-border));
+  color: var(--color-signal-red);
+}
+
+.yellow {
+  border-color: color-mix(in srgb, var(--color-signal-yellow) 55%, var(--color-border));
+  color: var(--color-yellow-text);
+}
+
+.blue {
+  border-color: color-mix(in srgb, var(--color-signal-blue) 45%, var(--color-border));
+  color: var(--color-signal-blue);
+}
