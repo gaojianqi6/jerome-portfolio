@@ -1,0 +1,24 @@
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+
+# Node modules
+node_modules
+
+# Build output
+build
+dist
+out
+.next
+
+# IDEs
+.vscode
+.idea
+.cursor
+
+# Logs
+logs
+*.log
+*.log.*
