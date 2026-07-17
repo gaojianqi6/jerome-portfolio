@@ -2,12 +2,88 @@
 title: RateEverything
 slug: rate-everything
 locale: zh
-summary: 一个产品化评分系统案例的起始占位内容。
-year: 2026
-tags:
+subtitle: 用户端、管理端、Node.js 与 Python 服务共享 PostgreSQL 模型的跨媒体评分产品。
+summary: 我从 Next.js 与 React 管理端开始，完成 NestJS、FastAPI、PostgreSQL、自动化测试和云部署的完整系统。
+client: 独立产品
+kind: independent
+status: live
+timeframe: 2025 年 2 月至今
+role: 独立 Full Stack Engineer 与产品负责人
+featured: false
+order: 4
+categories:
   - 全栈
-  - Next.js
+  - Node.js
+  - Python
   - 产品
+techStack:
+  - Next.js
+  - React
+  - TypeScript
+  - NestJS
+  - FastAPI
+  - Prisma
+  - SQLModel
+  - PostgreSQL
+  - Cypress
+links:
+  - label: 打开 RateEverything
+    href: https://rating.ospreypulse.com
+    type: live
+evidence:
+  - layer: 用户端
+    title: Next.js 评分体验
+    description: 响应式发现与评分流程使用 TypeScript、Zustand、明确加载状态和可索引路由。
+  - layer: 管理端
+    title: React 运营后台
+    description: 独立 Vite 应用提供媒体数据与辅助信息的 CRUD 和审核工作流。
+  - layer: Node API
+    title: NestJS 产品服务
+    description: 鉴权 REST Module、校验与 Prisma 负责主要用户产品契约。
+  - layer: Python API
+    title: FastAPI 管理服务
+    description: SQLModel 与类型化 Python Endpoint 支持对同一数据库的管理流程。
+  - layer: 数据
+    title: 共享 PostgreSQL 模型
+    description: 两个服务围绕同一关系 Schema 协作，不复制核心媒体领域数据。
+  - layer: 交付
+    title: 测试与多云部署
+    description: Jest 和 Cypress 覆盖关键路径；前端运行于 Vercel，API 部署在 GCP Cloud Run。
+architecture:
+  - step: "01"
+    title: 用户端与管理端
+    description: Next.js 和 Vite/React 围绕相同媒体概念提供不同工作流。
+  - step: "02"
+    title: NestJS 与 FastAPI
+    description: 服务边界分别对应用户产品和管理职责。
+  - step: "03"
+    title: PostgreSQL
+    description: Prisma 与 SQLModel 映射到同一持久关系事实来源。
+  - step: "04"
+    title: CI 与部署
+    description: 测试完成后，前端与 API 独立发布。
+results:
+  - 上线真实可访问的跨媒体评分产品和管理工作流。
+  - 用同一 PostgreSQL 领域展示 Node.js 与 Python 服务的实际拆分。
+  - 通过 Vercel Proxy 将 Cloud Run API 保持在产品域名路径下。
 ---
 
-这是项目案例的 MDX 起始占位。后续可以扩展为背景、架构、技术取舍、测试和结果。
+## 项目背景
+
+RateEverything 从一个简单问题出发：电影、电视剧、音乐、书籍和播客为什么必须散落在不同的评分历史里？这个产品尝试把多个媒体类别放进同一账户和发现模型。
+
+## 我的职责
+
+这是我独立设计和开发的项目，包括 Next.js 用户端、React 管理后台、NestJS 产品 API、FastAPI 管理 API、共享 PostgreSQL Schema、测试、CI 和部署。
+
+## 服务边界
+
+NestJS 服务负责主要产品契约，并使用 Prisma 访问关系数据。FastAPI 服务通过 SQLModel 为管理工作流提供小而明确的 Python 边界。两个服务共享数据库，因此 Schema 变化和数据所有权必须清楚；只有当职责清晰度高于协调成本时，第二个服务才有意义。
+
+## 质量与交付
+
+Jest 覆盖服务逻辑，Cypress 覆盖关键浏览器路径。公开网站部署在 Vercel，`rating.ospreypulse.com/api` 下的请求被代理到 GCP Cloud Run 上的 NestJS API，PostgreSQL 独立托管。稳定公开路径避免把 Cloud Provider URL 暴露为客户端契约。
+
+## 下一步加强方向
+
+下一步是增加 Prisma 与 SQLModel 之间的 Schema Compatibility Check、更完整的审核 Audit Event，以及覆盖 Proxy 边界的 Contract Test。推荐功能成为主要卖点前，也需要先建立更清晰的推荐效果评估方法。

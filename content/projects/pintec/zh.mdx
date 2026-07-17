@@ -1,0 +1,134 @@
+---
+title: 玄极智能投顾
+slug: pintec
+locale: zh
+subtitle: 覆盖 React Web、移动 Web、React Native 与银行合作方的 API-first 投资产品。
+summary: 我的工作从 Node.js、Express 与 MySQL 延伸到 Web 和移动端的开户、KYC、风险测评、投资组合和再平衡流程。
+client: Pintec
+kind: professional
+status: shipped
+timeframe: 2018 年 6 月 - 2020 年 2 月
+role: 覆盖 Express、MySQL、React、React Native 和共享业务逻辑的全栈贡献
+featured: true
+order: 2
+categories:
+  - 全栈
+  - 金融科技
+  - 跨平台
+  - Node.js
+techStack:
+  - Node.js
+  - Express
+  - MySQL
+  - React
+  - React Native
+  - Redux
+  - React Router
+  - React Navigation
+  - Jest
+links: []
+hero:
+  src: /images/projects/pintec/investment-mobile.jpeg
+  alt: 用户在手机上操作投资应用
+  caption: 用于表达移动投资场景的背景图片；原产品目前没有公开站点。
+  creditLabel: Liza Summer / Pexels
+  creditHref: https://www.pexels.com/photo/crop-dealer-touching-screen-on-smartphone-with-trading-application-6347705/
+  position: center 48%
+evidence:
+  - layer: 界面
+    title: Web 与 Native 产品流程
+    description: React 和 React Native 覆盖开户、风险问卷、KYC 状态、资产配置、收益表现和再平衡操作。
+  - layer: 状态
+    title: 共享 Redux 业务逻辑
+    description: Actions、Reducers、Selectors、API Model、校验规则和流程决策共享，浏览器与原生展示层保持独立。
+  - layer: API
+    title: Node.js 与 Express BFF
+    description: API 层完成调用方鉴权、请求校验、投资领域响应归一化，并同时服务自有客户端和银行合作方。
+  - layer: 数据
+    title: MySQL 事实来源
+    description: 关系数据覆盖用户、账户、产品、风险档案、投资组合版本、订单和需要审计的业务状态。
+  - layer: 集成
+    title: 收窄算法边界
+    description: 大部分业务数据直接来自 MySQL；只有特定组合构建或调整请求通过 Adapter 调用专业算法服务。
+  - layer: 平台
+    title: 银行合作方契约
+    description: 银行保留自己的界面并消费版本化 API，因此鉴权、兼容性、错误与追踪能力都是产品的一部分。
+architecture:
+  - step: "01"
+    title: React Web、React Native 与银行客户端
+    description: 每个渠道拥有自己的展示和导航，但遵循同一套投资领域契约。
+  - step: "02"
+    title: Express Middleware 与 Routes
+    description: 鉴权、授权、校验、请求上下文和统一错误保护产品 API。
+  - step: "03"
+    title: 领域服务
+    description: 用户、风险、组合、订单、KYC 和合作方用例与 HTTP Response 分离。
+  - step: "04"
+    title: MySQL
+    description: 用户档案、组合记录和投资操作以持久关系数据为准。
+  - step: "05"
+    title: 专业集成
+    description: 算法、原生能力和银行 Adapter 只在明确的系统边界被调用。
+results:
+  - 让同一投资产品覆盖 React Web、移动 Web 与 React Native，而不是形成三个互不相干的实现。
+  - 通过 Redux 和领域共享包复用约 80% 的业务逻辑，同时保留平台特有界面与导航。
+  - 同一后端能力既服务自有客户端，也能服务拥有独立展示层的银行合作方。
+---
+
+## 产品背景
+
+玄极是一套智能投顾产品。用户从开户进入风险测评，获得建议资产配置，查看组合表现，完成身份步骤，并发起再平衡等投资操作。金融信息需要尽量清楚，但限制状态、处理中、失败与确认也必须明确，不能用模糊界面掩盖风险。
+
+产品最终服务的不止一个展示层。React 负责浏览器体验，React Native 负责移动 App，合作银行则可以使用自己的界面接入相同产品能力。这意味着后端契约不是某个页面的内部实现，而是需要长期兼容的平台边界。
+
+## 我的职责与边界
+
+我参与 Node.js 与 Express 服务、MySQL 业务数据、React Web、React Native、Redux 架构和原生集成点，并与产品、设计、iOS/Android、QA、基础设施、算法和银行对接团队协作。
+
+专业算法团队负责投资数学模型。我负责把特定算法结果安全接入产品，而不是声称由我开发模型本身。绝大多数普通请求由 Express 与 MySQL 直接处理，算法服务只保留在少量清晰的专业计算边界。
+
+## 用户流程如何贯穿全栈
+
+### 开户与风险测评
+
+客户端通过分步流程收集账户与适当性信息，提供校验和可恢复状态。Express 在服务端再次校验，读取 MySQL 产品数据，并返回稳定的风险档案结果。服务端始终是事实来源；客户端校验改善体验，但不会决定金融正确性。
+
+### 投资组合与资产配置
+
+React Selector 把 API 数据转化为面向界面的 View Model，用于配置图表、收益摘要和状态文案。UI 不需要理解完整数据库结构。特定的组合构建或调整经过算法 Adapter，之后仍回到 Web、移动端与银行共用的产品契约。
+
+### KYC 与受保护操作
+
+移动流程与原生工程师协作接入相机、Biometric Login 和 Push Notification。共享层负责工作流状态、校验、API Model 和错误解释；Native Module 负责设备权限与安全能力。敏感提交需要防重复操作、服务端校验和清晰审计记录。
+
+## “80% 复用”具体指什么
+
+这里并不是 80% UI 完全相同。浏览器路由、表格、Hover、移动导航、触控和原生权限本来就是不同问题。真正共享的是在所有平台都应该保持同一语义的部分：
+
+- Redux Actions、Reducers 与 Selectors。
+- API Request / Response Models。
+- 校验规则和工作流决策。
+- 登录状态和错误解释。
+- 投资组合数据转换与状态逻辑。
+
+React Web 与 React Native 在公共核心外使用各自适合的平台组件。这样既保持产品行为一致，也不会让浏览器组件假装成原生页面。
+
+## Express 与 MySQL 的职责
+
+Express 作为 API/BFF 边界，鉴别自有或合作方调用者，校验输入，执行产品规则，访问 MySQL Repository，转换外部故障，并返回稳定响应。用户、账户、产品、风险档案、组合版本和订单记录之间存在清晰关系，因此 MySQL 比客户端状态更适合作为持久事实来源。
+
+对于写操作，重点是事务、幂等和兼容。禁用按钮只能改善 UX，真正防止重复金融操作仍需要服务端唯一约束和事务。API 变化也必须兼容无法立即升级的移动客户端，以及需要约定迁移窗口的银行系统。
+
+## 关键技术决策
+
+**共享行为，不强行共享渲染。** 公共 Redux 与领域包保护一致性，平台专属 UI 保证可用性和性能。
+
+**把算法隐藏在 Adapter 后面。** 产品 API 负责鉴权、适当性上下文、持久化、错误和 Response Shape；专业服务只提供特定计算。
+
+**从一开始考虑多个客户端。** 银行控制自己的体验，因此版本化契约、合作方身份、Scope、审计和兼容变化都是必要条件。
+
+**金融事实留在服务端。** 客户端计算可以辅助展示，但组合、KYC 和操作状态必须以后端服务和 MySQL 为准。
+
+## 现在会如何加强
+
+我会采用端到端 TypeScript Contract 或 Schema Generation、RFC 9457 Problem Details、显式 Idempotency Key、更强的 MySQL Transaction Integration Test，以及贯穿 Express、数据库、缓存与算法调用的 OpenTelemetry。我仍会保留原来的核心选择：共享领域行为、平台原生展示，以及能够服务自有代码之外客户端的稳定后端契约。

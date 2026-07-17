@@ -20,7 +20,13 @@ export function CopyEmailButton({ locale }: { locale: Locale }) {
   }
 
   return (
-    <Button variant="ghost" onClick={onCopy} type="button">
+    <Button
+      analyticsEvent="contact_click"
+      analyticsLabel="copy-email"
+      variant="ghost"
+      onClick={onCopy}
+      type="button"
+    >
       {copied ? <Check size={18} /> : <Copy size={18} />}
       {copied ? (locale === "zh" ? "已复制" : "Copied") : contact.email}
     </Button>

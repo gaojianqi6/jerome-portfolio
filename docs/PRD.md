@@ -1,5 +1,13 @@
 # Jerome Portfolio PRD
 
+## V1 交付决策（2026-07-17）
+
+- 市场定位统一为 Full Stack Engineer，以 Node.js / NestJS / Express 和 .NET 后端能力为主，React、Next.js、React Native 作为完整产品交付的一部分。
+- 首批深度案例为 Carsome、Pintec、Mealway，中英文同步发布；RateEverything 保留为次级独立产品案例。
+- Projects V1 使用 `Professional Work / Independent Products` 紧凑分组列表。项目超过 6 个且筛选能明显降低查找成本后，再实现复杂筛选。
+- About 覆盖职业路径、工程原则、当前方向和中英双语协作；Contact 只提供 availability、Email、LinkedIn、GitHub 和真实 CV。
+- 发布范围包括 metadata、Open Graph、canonical、hreflang、sitemap、robots、404、结构化数据，以及 CTA、项目、CV 点击事件。
+
 ## 1. 产品目标
 
 ### 背景
@@ -66,7 +74,7 @@ Jerome 希望做一个个人 Portfolio，让更多人看见自己。真实需求
 | 首页 | 技术能力摘要 | 全栈、前端结构、跨端、测试、DevOps |
 | 首页 | 设计与结构展示 | 用高级视觉层级、组件组织、响应式细节体现前端设计能力 |
 | 关于我 | 个人故事 | 简洁说明职业路径、工程风格、当前目标 |
-| 项目案例 | Case study 列表 | 支持按技术、类型、年份筛选 |
+| 项目案例 | Case study 列表 | V1 按职业项目和独立产品分组；项目超过 6 个后再增加筛选 |
 | 项目详情 | 问题-方案-结果 | 背景、目标、角色、架构、难点、结果 |
 | 项目详情 | 全栈证据链 | UI、状态、API、数据、测试、部署如何协同 |
 | 项目详情 | 证据链接 | Live demo、GitHub、截图、架构图、测试说明 |
@@ -83,7 +91,7 @@ Jerome 希望做一个个人 Portfolio，让更多人看见自己。真实需求
 - 首页首屏：定位、核心能力、CTA。
 - 完整中英双语内容，导航、项目、关于、CTA 都支持 EN/ZH。
 - 明确不做 contact form，仅提供 email、LinkedIn、GitHub、CV 下载。
-- 项目 case study：至少 RateEverything、Te Kemu Arapū、Carsome、Osprey Pulse / Mealway 其中 3 个。
+- 项目 case study：Carsome、Pintec、Mealway 三篇完整双语案例，以及 RateEverything 次级案例。
 - CV 下载、Email、LinkedIn、GitHub 链接。
 - 响应式布局，覆盖 mobile/tablet/desktop。
 - SEO metadata、Open Graph、基础可访问性。
@@ -92,7 +100,7 @@ Jerome 希望做一个个人 Portfolio，让更多人看见自己。真实需求
 
 ### Should Have
 
-- 项目筛选和标签系统。
+- 项目超过 6 个后的筛选和标签系统。
 - 技术栈矩阵和能力分层。
 - 每个项目的架构图或任务流图。
 - 页面过渡和微交互动效。

@@ -6,11 +6,14 @@ export default defineConfig({
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
       "@content": fileURLToPath(new URL("./content", import.meta.url)),
+      "content-collections": fileURLToPath(
+        new URL("./.content-collections/generated/index.js", import.meta.url),
+      ),
     },
   },
   test: {
     environment: "jsdom",
-    include: ["tests/unit/**/*.test.ts"],
+    include: ["tests/unit/**/*.test.{ts,tsx}"],
     globals: true,
   },
 });

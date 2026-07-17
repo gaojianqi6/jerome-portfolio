@@ -1,5 +1,7 @@
 import { ArrowUpRight, FileDown, Mail } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import type { Metadata } from "next";
 import { Button } from "@/components/ui/Button";
 import { CopyEmailButton } from "@/components/portfolio/CopyEmailButton";
 import { isLocale, type Locale } from "@/lib/i18n";
@@ -14,6 +16,23 @@ import {
   stackRows,
 } from "@content/data/dictionary";
 import styles from "./page.module.css";
+import { absoluteUrl } from "@/lib/site";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : "en";
+  const description = homeCopy[locale].subtitle;
+
+  return {
+    title: locale === "zh" ? "全栈工程师" : "Full Stack Engineer",
+    description,
+    alternates: {
+      canonical: absoluteUrl(`/${locale}`),
+      languages: { en: absoluteUrl("/en"), "zh-Hans": absoluteUrl("/zh") },
+    },
+    openGraph: { title: `Jerome Gao / ${locale === "zh" ? "全栈工程师" : "Full Stack Engineer"}`, description },
+  };
+}
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
@@ -37,11 +56,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <h1>{copy.title}</h1>
           <p className={styles.subtitle}>{copy.subtitle}</p>
           <div className={styles.ctas}>
-            <Button href="#work">
+            <Button analyticsEvent="cta_click" analyticsLabel="home:work" href="#work">
               {copy.primaryCta}
               <ArrowUpRight size={18} />
             </Button>
-            <Button href={`mailto:${contact.email}`} variant="ghost">
+            <Button analyticsEvent="contact_click" analyticsLabel="home:email" href={`mailto:${contact.email}`} variant="ghost">
               {copy.secondaryCta}
               <Mail size={18} />
             </Button>
@@ -90,7 +109,17 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <div>
                   <p className={styles.projectMeta}>{project.meta}</p>
                   <h3>
-                    {project.href ? (
+                    {project.slug ? (
+                      <Link
+                        className={styles.projectTitleLink}
+                        data-analytics-event="project_case_study_click"
+                        data-analytics-label={project.slug}
+                        href={`/${locale}/projects/${project.slug}`}
+                      >
+                        {project.name}
+                        <ArrowUpRight size={20} />
+                      </Link>
+                    ) : "href" in project && project.href ? (
                       <a
                         className={styles.projectTitleLink}
                         href={project.href}
@@ -134,15 +163,29 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 <div>
                   <p className={styles.projectMeta}>{project.meta}</p>
                   <h3>
-                    <a
-                      className={styles.projectTitleLink}
-                      href={project.href}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                    >
-                      {project.name}
-                      <ArrowUpRight size={20} />
-                    </a>
+                    {project.slug ? (
+                      <Link
+                        className={styles.projectTitleLink}
+                        data-analytics-event="project_case_study_click"
+                        data-analytics-label={project.slug}
+                        href={`/${locale}/projects/${project.slug}`}
+                      >
+                        {project.name}
+                        <ArrowUpRight size={20} />
+                      </Link>
+                    ) : (
+                      <a
+                        className={styles.projectTitleLink}
+                        data-analytics-event="project_external_click"
+                        data-analytics-label={project.name}
+                        href={project.href}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                      >
+                        {project.name}
+                        <ArrowUpRight size={20} />
+                      </a>
+                    )}
                   </h3>
                   <p className={styles.projectRole}>{project.role}</p>
                 </div>
@@ -216,11 +259,17 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
           <div className={styles.contactActions}>
             <CopyEmailButton locale={locale} />
-            <Button href={contact.cv} variant="secondary">
+            <Button
+              analyticsEvent="cv_download"
+              analyticsLabel={`home:${locale}`}
+              download={locale === "zh" ? "Jerome-Gao-CV-CN.pdf" : "Jerome-Gao-CV.pdf"}
+              href={contact.cv[locale]}
+              variant="secondary"
+            >
               <FileDown size={18} />
               CV
             </Button>
-            <Button href={contact.linkedin} variant="ghost">
+            <Button analyticsEvent="social_click" analyticsLabel="linkedin:home" href={contact.linkedin} variant="ghost">
               LinkedIn
               <ArrowUpRight size={18} />
             </Button>

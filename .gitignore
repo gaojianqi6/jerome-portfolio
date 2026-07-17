@@ -14,6 +14,8 @@ out
 .next/
 .content-collections/
 tsconfig.tsbuildinfo
+test-results/
+playwright-report/
 
 # IDEs
 .vscode
@@ -24,3 +26,11 @@ tsconfig.tsbuildinfo
 logs
 *.log
 *.log.*
+
+# LaTeX build artifacts
+docs/resume/*.aux
+docs/resume/*.fdb_latexmk
+docs/resume/*.fls
+docs/resume/*.log
+docs/resume/*.out
+docs/resume/*.synctex.gz

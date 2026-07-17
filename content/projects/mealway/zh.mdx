@@ -1,0 +1,124 @@
+---
+title: Mealway
+slug: mealway
+locale: zh
+subtitle: 使用类型化 .NET API、PostgreSQL 领域模型和共享 Web/移动端客户端构建的 AI 饮食计划产品。
+summary: 我从 Next.js 与 Expo 页面开始，一直负责到 ASP.NET Core 服务、Gemini 工作流、PostgreSQL、测试、Docker 和 Azure Container Apps 的完整生产链路。
+client: 独立产品
+kind: independent
+status: live
+timeframe: 2026 年 4 月至今
+role: 独立 Full Stack Engineer 与产品负责人
+featured: true
+order: 3
+categories:
+  - 全栈
+  - .NET
+  - AI 产品
+  - 云服务
+techStack:
+  - ASP.NET Core 10
+  - EF Core
+  - PostgreSQL
+  - Gemini
+  - Next.js
+  - Expo
+  - Solito
+  - TanStack Query
+  - Docker
+  - Azure
+links:
+  - label: 打开 Mealway
+    href: https://mealway.io
+    type: live
+hero:
+  src: /images/projects/mealway/meal-planning.jpeg
+  alt: 正在被整理到餐盒中的多份餐食
+  caption: 饮食计划是反复出现的协调问题，不只是搜索一道菜谱。
+  creditLabel: IARA MELO / Pexels
+  creditHref: https://www.pexels.com/photo/meal-prep-with-fresh-ingredients-30635717/
+  position: center 46%
+evidence:
+  - layer: 客户端
+    title: 共享的 Next.js 与 Expo 产品
+    description: Solito Monorepo 共享页面、Hooks、API Wrapper、设计 Token 和校验，同时保留 Web 与 Native 各自入口。
+  - layer: 契约
+    title: 生成类型与稳定错误
+    description: OpenAPI 生成的 TypeScript Model 与 ASP.NET API 保持一致，非成功响应统一使用 Problem Details。
+  - layer: API
+    title: ASP.NET Core 应用服务
+    description: Minimal API Endpoint 把用户、设置、菜谱、计划、换餐、确认和购物清单流程交给 Use Case Service。
+  - layer: 数据
+    title: EF Core 与 PostgreSQL
+    description: 版本化 Migration 建模用户、设置、菜谱、食材、计划、餐食、购物清单与历史，以 PostgreSQL 为事实来源。
+  - layer: AI
+    title: 受 Schema 约束的 Gemini 工作流
+    description: 类型化 JSON Schema、模型选择、Rate Limit、Fallback、Token/延迟日志，以及明确的不可用和无效响应路径把 AI 控制在契约后。
+  - layer: 交付
+    title: Docker 与 Azure 生产路径
+    description: API 运行于 Azure Container Apps，数据库使用 Supabase Postgres，前端在 Vercel，Secret 通过 Azure 资源管理。
+architecture:
+  - step: "01"
+    title: Next.js Web 与 Expo Mobile
+    description: 共享 Feature Screen 使用生成类型、TanStack Query、Redux Toolkit 和 Firebase 身份。
+  - step: "02"
+    title: 版本化 REST API
+    description: ASP.NET Core 围绕清晰用例处理鉴权、校验、限流、请求日志和 RFC Problem Details。
+  - step: "03"
+    title: Application 与 Domain
+    description: Service 和 Domain Entity 让饮食计划规则与 HTTP、外部 Provider 解耦。
+  - step: "04"
+    title: PostgreSQL
+    description: EF Core Migration 保存持久的用户、菜谱、计划和购物清单状态。
+  - step: "05"
+    title: Gemini 与云依赖
+    description: AI 生成是带类型输出和 Fallback 的 Adapter；Docker 把同一 API Build 交付到 Azure Container Apps。
+results:
+  - 上线包含菜谱浏览、用户设置、AI 计划对话、澄清、换餐、计划确认和购物清单的真实产品。
+  - 通过 OpenAPI 生成类型和 Problem Details，让 Web、Native 与后端契约保持一致。
+  - 在生产部署前，为 Plan、Grocery、User、Recipe 和 AI Failure Path 加入单元测试与 PostgreSQL 集成测试。
+---
+
+## 产品问题
+
+Mealway 从一个很小但持续存在的问题开始：个人和家庭每天决定吃什么，会变成重复的计划负担。真正有用的产品需要连接饮食偏好、菜谱、多日计划、替换选项和购物清单。对话式 AI 可以减少复杂表单，但不能让任意自然语言直接成为系统事实。
+
+这是我的独立产品，我负责完整交付：产品决策、共享 Web/移动体验、API 与领域模型、AI 集成、测试、容器化、云部署和上线后的运行检查。
+
+## 客户端架构
+
+前端使用 Solito Monorepo，Next.js 承载 Web，Expo 承载 Native。共享 Package 放置 Feature Screen、Hooks、API Wrapper、UI Primitive 和状态；平台入口保留各自的路由、构建配置与原生集成。
+
+TanStack Query 负责服务端状态获取与失效，Redux Toolkit 只管理跨页面客户端状态，避免复制 API Cache。客户端 Contract 从后端 OpenAPI 生成，减少 C# DTO 与 TypeScript Consumer 之间的漂移；Zod 与共享 Form Rule 仍然在交互边界校验用户输入。
+
+## API 与领域边界
+
+ASP.NET Core Minimal API 暴露版本化 Route，但 Endpoint Handler 不包含完整业务。Application Service 负责注册、用户与饮食设置、菜谱列表/详情、计划对话与澄清、换餐、确认和购物清单。`Result<T>` 把预期业务失败映射为 RFC Problem Details；Global Exception Handler 只负责最后的 500 边界。
+
+Domain 与 EF Core Model 包含 `User`、`MealSettings`、`Recipe`、`Ingredient`、`Plan`、`Meal`、`GroceryList`、`GroceryItem` 和 `UserRecipeHistory`。确认后的状态以 PostgreSQL 为准，Migration 与 Seeder 进入版本控制，Integration Test 使用 Testcontainers 和 Respawn 运行真实 PostgreSQL。
+
+## 把 AI 变成可靠依赖
+
+Gemini 用于计划生成和澄清，但产品其他部分不会依赖自由文本。`GeminiSchemaBuilder` 根据预期 C# 类型生成 Response Schema；Client 请求结构化输出并反序列化，在响应为空、格式错误、Rate Limit 或所有配置模型都不可用时，返回明确的 Conflict 或 Service Unavailable。
+
+Model Selector 和 In-memory Limiter 控制调用压力。结构化日志记录 Purpose、Model、Latency、Token、Fallback 与失败类别，不记录用户隐私内容。Integration Test 使用 Fake Client 替代外部 Provider，使成功和失败路径都可重复验证。
+
+## 部署与可观测性
+
+API 构建为 Docker Image，并在 Azure Container Apps 上通过 `api.mealway.io` 运行。Next.js 前端部署在 Vercel，PostgreSQL 由 Supabase 托管。Azure 侧包含 Container Environment、Registry 与 Key Vault。稳定域名把 Provider 细节隐藏起来，未来切换 API 或数据库目标时不需要改变客户端契约。
+
+Serilog 输出结构化请求与应用事件。Azure Container Apps 提供 Request、Response Time、Replica、Restart、CPU、Memory 和 Container Log 视图。项目已经具备 Application Insights Package 与 Sink，需要更深 Request/Dependency Telemetry 时可以启用；当前生产策略刻意保持轻量，避免为学习型产品引入不必要成本。
+
+## 可靠性决策
+
+**AI 故障是产品状态。** Rate Limit、模型不可用、无效 JSON 或空响应都变成类型化错误，服务不会虚构计划，也不会让请求管线崩溃。
+
+**确认数据属于事务数据。** 生成建议可以是临时的，确认后的计划和购物清单进入 PostgreSQL，并通过 Application Service 维护不变量。
+
+**契约自动生成，错误格式标准化。** OpenAPI Types 与 Problem Details 给 Web、Mobile、测试和未来集成提供同一套语言。
+
+**测试强度跟随风险。** Domain Rule 与 Application Service 使用 Unit Test；鉴权、计划、清单、菜谱与 AI 错误行为使用真实 HTTP + PostgreSQL Integration Test。
+
+## 下一步
+
+当 API 扩展到多个 Replica 后，下一步是分布式 Rate Limit；随后增加 AI 成本预算、从客户端贯穿 Gemini Call 的 Request Correlation，以及针对持续 5xx 或 Model Fallback Exhaustion 的生产告警。产品可以在不削弱计划与购物清单核心的前提下继续扩展价格比较和餐厅发现。

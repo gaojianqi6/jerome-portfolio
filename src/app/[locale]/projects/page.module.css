@@ -1,42 +1,219 @@
 .page {
-  padding: clamp(3rem, 7vw, 6rem) var(--page-gutter);
+  background: #0a1016;
 }
 
 .intro {
-  margin-bottom: 2rem;
-  max-width: 54rem;
+  background: linear-gradient(135deg, #111a23, #090e13 76%);
+  border-bottom: 1px solid var(--color-border);
+  display: grid;
+  gap: 1rem clamp(2rem, 7vw, 7rem);
+  grid-template-columns: minmax(0, 7fr) minmax(18rem, 4fr);
+  padding: clamp(3rem, 7vw, 6rem) var(--page-gutter);
 }
 
-.intro p {
+.intro > p {
   color: var(--color-signal-red);
   font-family: var(--font-mono);
   font-size: var(--font-size-xs);
   font-weight: 900;
-  margin: 0 0 1rem;
+  grid-column: 1 / -1;
+  margin: 0;
   text-transform: uppercase;
 }
 
 .intro h1 {
-  font-size: clamp(3rem, 8vw, 7rem);
-  line-height: 0.9;
-  margin: 0 0 1rem;
+  font-size: clamp(2.35rem, 4.7vw, 4.9rem);
+  line-height: 1;
+  margin: 0;
+  max-width: 15ch;
 }
 
-.intro span {
-  color: var(--color-muted);
-  display: block;
+.intro > span {
+  align-self: end;
+  color: #bac7cf;
   font-size: var(--font-size-lg);
   line-height: 1.55;
 }
 
-.grid {
+.group {
+  background: linear-gradient(135deg, var(--color-band-work), #0d151d);
+  border-bottom: 1px solid var(--color-border);
   display: grid;
-  gap: 0.8rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: minmax(12rem, 3fr) minmax(0, 9fr);
+  padding: var(--section-space) var(--page-gutter);
 }
 
-@media (max-width: 780px) {
-  .grid {
+.group:nth-of-type(2) {
+  background: linear-gradient(135deg, var(--color-band-side), #101922);
+}
+
+.groupHeading h2 {
+  font-size: clamp(1.65rem, 2.8vw, 2.8rem);
+  line-height: 1;
+  margin: 0 0 1rem;
+}
+
+.groupHeading p {
+  color: var(--color-muted);
+  line-height: 1.55;
+  margin: 0;
+  max-width: 24rem;
+}
+
+.projectList {
+  border-top: 1px solid var(--color-border-strong);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.projectList li {
+  align-items: start;
+  border-bottom: 1px solid var(--color-border);
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 2.5rem minmax(11rem, 3fr) minmax(15rem, 5fr) 2.75rem;
+  padding: 1.4rem 0;
+}
+
+.index,
+.projectIdentity small,
+.projectSummary span,
+.additionalList small,
+.additionalList > article > span {
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+}
+
+.projectIdentity h3,
+.additionalList h3 {
+  font-size: clamp(1.2rem, 1.7vw, 1.65rem);
+  line-height: 1.15;
+  margin: 0.45rem 0;
+}
+
+.projectIdentity p,
+.projectSummary p,
+.additionalList p {
+  color: var(--color-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.projectIdentity p {
+  color: var(--color-ink);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+
+.projectSummary span {
+  color: var(--color-signal-blue);
+  display: block;
+  line-height: 1.45;
+  margin-top: 0.7rem;
+}
+
+.projectList li > a {
+  align-items: center;
+  color: var(--color-ink);
+  display: flex;
+  justify-content: center;
+  min-height: 2.75rem;
+  text-decoration: none;
+}
+
+.projectList li > a span {
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+}
+
+.projectList li > a:hover {
+  color: var(--color-signal-blue);
+}
+
+.additional {
+  background: linear-gradient(120deg, #dce4e8, #cbd8df);
+  color: #101820;
+}
+
+.additional .groupHeading p,
+.additionalList p {
+  color: #485761;
+}
+
+.additionalList {
+  border-top: 1px solid rgb(16 24 32 / 30%);
+}
+
+.additionalList article {
+  border-bottom: 1px solid rgb(16 24 32 / 24%);
+  display: grid;
+  gap: 1rem 2rem;
+  grid-template-columns: minmax(12rem, 3fr) minmax(16rem, 5fr) minmax(10rem, 3fr);
+  padding: 1.25rem 0;
+}
+
+.additionalList h3 a {
+  align-items: center;
+  color: inherit;
+  display: inline-flex;
+  gap: 0.4rem;
+  text-decoration: none;
+}
+
+.additionalList > article > span {
+  color: #33444e;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .intro,
+  .group {
     grid-template-columns: 1fr;
+  }
+
+  .projectList li {
+    grid-template-columns: 2rem minmax(11rem, 2fr) minmax(0, 3fr) 2.75rem;
+  }
+
+  .additionalList article {
+    grid-template-columns: minmax(11rem, 2fr) minmax(0, 3fr);
+  }
+
+  .additionalList > article > span {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 650px) {
+  .intro {
+    padding-bottom: 3.5rem;
+    padding-top: 3.5rem;
+  }
+
+  .projectList li {
+    grid-template-columns: 1.75rem minmax(0, 1fr) 2.5rem;
+  }
+
+  .projectSummary {
+    grid-column: 2 / -1;
+  }
+
+  .projectList li > a {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .additionalList article {
+    grid-template-columns: 1fr;
+  }
+
+  .additionalList > article > span {
+    grid-column: auto;
   }
 }

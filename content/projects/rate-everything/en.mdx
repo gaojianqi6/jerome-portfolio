@@ -2,12 +2,88 @@
 title: RateEverything
 slug: rate-everything
 locale: en
-summary: A product-minded rating system case study placeholder.
-year: 2026
-tags:
+subtitle: A cross-media rating product with separate user, admin, Node.js, and Python services sharing one PostgreSQL model.
+summary: I built and deployed the system from Next.js and React administration through NestJS, FastAPI, PostgreSQL, automated tests, and cloud delivery.
+client: Independent product
+kind: independent
+status: live
+timeframe: Feb 2025 - Present
+role: Independent Full Stack Engineer and product owner
+featured: false
+order: 4
+categories:
   - Full-stack
-  - Next.js
+  - Node.js
+  - Python
   - Product
+techStack:
+  - Next.js
+  - React
+  - TypeScript
+  - NestJS
+  - FastAPI
+  - Prisma
+  - SQLModel
+  - PostgreSQL
+  - Cypress
+links:
+  - label: Open RateEverything
+    href: https://rating.ospreypulse.com
+    type: live
+evidence:
+  - layer: User web
+    title: Next.js rating experience
+    description: Responsive discovery and rating flows use TypeScript, Zustand, explicit loading states, and indexable routes.
+  - layer: Admin
+    title: React operations portal
+    description: A separate Vite application provides CRUD and moderation workflows for media records and supporting data.
+  - layer: Node API
+    title: NestJS product service
+    description: Authenticated REST modules, validation, and Prisma own the main consumer-facing product contract.
+  - layer: Python API
+    title: FastAPI administration service
+    description: SQLModel and typed Python endpoints support focused administration workflows against the same database.
+  - layer: Data
+    title: Shared PostgreSQL model
+    description: Both services coordinate around one relational schema instead of duplicating the core media domain.
+  - layer: Delivery
+    title: Tests and multi-cloud deployment
+    description: Jest and Cypress cover key paths; the public frontend runs on Vercel and the API runs on GCP Cloud Run.
+architecture:
+  - step: "01"
+    title: User and admin clients
+    description: Next.js and Vite/React present different workflows over shared media concepts.
+  - step: "02"
+    title: NestJS and FastAPI
+    description: Service boundaries follow consumer and administration responsibilities.
+  - step: "03"
+    title: PostgreSQL
+    description: Prisma and SQLModel map to one durable relational source.
+  - step: "04"
+    title: CI and deployment
+    description: Tests run before independent frontend and API releases.
+results:
+  - Shipped a live cross-media rating product and administration workflow.
+  - Demonstrated a practical Node.js and Python service split over one PostgreSQL domain.
+  - Kept public API traffic under the product domain through a Vercel proxy to Cloud Run.
 ---
 
-This MDX file is a starter case study placeholder. The full narrative can expand into context, architecture, decisions, testing, and results.
+## Context
+
+RateEverything explores a simple product question: why should film, television, music, books, podcasts, and other media live in unrelated rating histories? The product brings those categories into one account and one discovery model.
+
+## My role
+
+I designed and built the system as an independent project. That includes the public Next.js experience, the React administration portal, the NestJS product API, the FastAPI administration API, the shared PostgreSQL schema, tests, CI, and deployment.
+
+## Service boundaries
+
+The NestJS service owns the main product contract and uses Prisma for relational access. The FastAPI service gives administration workflows a small typed Python boundary through SQLModel. They share the database, so schema changes and ownership rules have to be deliberate; a second service is useful only when its responsibility is clearer than the coordination cost it introduces.
+
+## Quality and delivery
+
+Jest covers service logic and Cypress covers important browser paths. The public site is deployed on Vercel. Requests under `rating.ospreypulse.com/api` are proxied to the NestJS API on GCP Cloud Run, with PostgreSQL hosted separately. Stable public paths keep provider URLs out of the browser-facing contract.
+
+## What I would strengthen next
+
+The next step is stronger schema-compatibility checks between Prisma and SQLModel, richer moderation audit events, and contract tests around the proxy boundary. The product also needs clearer recommendation evaluation before recommendation features become a central claim.

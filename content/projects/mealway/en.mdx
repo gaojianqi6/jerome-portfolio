@@ -1,0 +1,124 @@
+---
+title: Mealway
+slug: mealway
+locale: en
+subtitle: An AI-assisted meal-planning product with a typed .NET API, PostgreSQL domain model, and shared web/mobile client.
+summary: I designed and shipped the product path from Next.js and Expo screens through ASP.NET Core services, Gemini workflows, PostgreSQL, tests, Docker, and Azure Container Apps.
+client: Independent product
+kind: independent
+status: live
+timeframe: Apr 2026 - Present
+role: Independent Full Stack Engineer and product owner
+featured: true
+order: 3
+categories:
+  - Full-stack
+  - .NET
+  - AI product
+  - Cloud
+techStack:
+  - ASP.NET Core 10
+  - EF Core
+  - PostgreSQL
+  - Gemini
+  - Next.js
+  - Expo
+  - Solito
+  - TanStack Query
+  - Docker
+  - Azure
+links:
+  - label: Open Mealway
+    href: https://mealway.io
+    type: live
+hero:
+  src: /images/projects/mealway/meal-planning.jpeg
+  alt: Prepared meals being organised into containers
+  caption: Meal planning is a recurring coordination problem, not just a recipe search.
+  creditLabel: IARA MELO / Pexels
+  creditHref: https://www.pexels.com/photo/meal-prep-with-fresh-ingredients-30635717/
+  position: center 46%
+evidence:
+  - layer: Clients
+    title: Shared Next.js and Expo product
+    description: A Solito monorepo shares screens, hooks, API wrappers, design tokens, and validation while web and native keep their own entry points.
+  - layer: Contracts
+    title: Generated types and stable errors
+    description: OpenAPI-generated TypeScript models align clients with the ASP.NET API; non-success responses use Problem Details instead of ad hoc messages.
+  - layer: API
+    title: ASP.NET Core application services
+    description: Minimal API endpoints delegate to use-case services for users, settings, recipes, plans, swaps, confirmation, and grocery-list workflows.
+  - layer: Data
+    title: EF Core and PostgreSQL
+    description: Versioned migrations model users, settings, recipes, ingredients, plans, meals, grocery lists, items, and recipe history with PostgreSQL as the source of truth.
+  - layer: AI
+    title: Schema-constrained Gemini workflows
+    description: Typed JSON schemas, model selection, rate limits, fallback behaviour, token and latency logs, and explicit unavailable/invalid-response paths keep AI behind a contract.
+  - layer: Delivery
+    title: Docker and Azure production path
+    description: The API runs in Azure Container Apps, the database is on Supabase Postgres, the frontend is on Vercel, and secrets are managed through Azure resources.
+architecture:
+  - step: "01"
+    title: Next.js web and Expo mobile
+    description: Shared feature screens use generated models, TanStack Query, Redux Toolkit, and Firebase-managed identity.
+  - step: "02"
+    title: Versioned REST API
+    description: ASP.NET Core handles auth, validation, rate limits, request logging, and RFC Problem Details around focused use cases.
+  - step: "03"
+    title: Application and domain
+    description: Services and domain entities keep meal-planning rules separate from HTTP and external providers.
+  - step: "04"
+    title: PostgreSQL
+    description: EF Core migrations preserve durable user, recipe, plan, and grocery state.
+  - step: "05"
+    title: Gemini and cloud dependencies
+    description: AI generation is an adapter with typed output and fallback; Docker carries the same API build into Azure Container Apps.
+results:
+  - Shipped a live product with recipe browsing, settings, AI plan chat, clarification, meal swaps, plan confirmation, and grocery-list workflows.
+  - Kept web, native, and backend contracts aligned through generated OpenAPI types and explicit Problem Details responses.
+  - Added unit and PostgreSQL-backed integration coverage for plan, grocery, user, recipe, and AI failure paths before production deployment.
+---
+
+## The product problem
+
+Mealway starts from a small but persistent problem: deciding what to eat becomes repeated planning work for individuals and families. A useful product has to connect preferences, recipes, a multi-day plan, substitutions, and a grocery list. A conversational AI can reduce form-heavy setup, but it cannot be allowed to return arbitrary text and become the system of record.
+
+I designed Mealway as an independent product and own the full delivery path: product decisions, shared web/mobile experience, API and domain model, AI integration, testing, containerisation, cloud deployment, and operational follow-up.
+
+## Client architecture
+
+The frontend is a Solito monorepo with Next.js for web and Expo for native. The shared package contains feature screens, hooks, API wrappers, UI primitives, and state. Platform entry points keep routing, build configuration, and native integration where they belong.
+
+TanStack Query owns server-state fetching and invalidation. Redux Toolkit is reserved for cross-screen client state rather than duplicating API caches. The client contract is generated from the backend OpenAPI document, which reduces drift between C# DTOs and TypeScript consumers. Zod schemas and shared form rules still validate user input at the interaction boundary.
+
+## API and domain boundaries
+
+ASP.NET Core Minimal APIs expose versioned routes, but endpoint handlers do not contain the complete use case. Application services handle registration, profile and meal settings, recipe browse/detail, plan chat and clarification, meal swaps, confirmation, and grocery operations. `Result<T>` maps expected business failures to RFC Problem Details; the global exception handler is the last-resort 500 boundary.
+
+The domain and EF Core model cover `User`, `MealSettings`, `Recipe`, `Ingredient`, `Plan`, `Meal`, `GroceryList`, `GroceryItem`, and `UserRecipeHistory`. PostgreSQL is authoritative for confirmed state. Migrations and seeders are version controlled, and integration tests run against disposable PostgreSQL with Testcontainers and Respawn.
+
+## Making AI a reliable dependency
+
+Gemini is used for plan generation and clarification, but the rest of the product does not depend on free-form prose. `GeminiSchemaBuilder` creates a response schema for the expected C# type. The client requests structured output, deserialises it, and returns an explicit conflict or unavailable result when the response is empty, malformed, rate-limited, or exhausted across configured models.
+
+The model selector and in-memory limiter control demand. Structured logs record purpose, selected model, latency, token counts, fallback, and failure category without logging private user content. Integration tests replace the provider with a fake client so success and failure flows are deterministic.
+
+## Deployment and observability
+
+The API is built as a Docker image and runs at `api.mealway.io` on Azure Container Apps. The public Next.js frontend runs on Vercel, and PostgreSQL is hosted by Supabase. Azure resources include the container environment, registry, and Key Vault. This split keeps provider-specific details behind stable hostnames and allows the API or database target to change without changing the client contract.
+
+Serilog writes structured request and application events. Azure Container Apps provides request, response-time, replica, restart, CPU, memory, and container log views. Application Insights packages and sinks are available for deeper request and dependency telemetry when that cost is justified; the current production policy keeps monitoring intentionally lightweight.
+
+## Reliability decisions
+
+**AI failure is a product state.** A rate limit, unavailable model, invalid JSON, or empty response becomes a typed error. The service does not invent a plan or crash the request pipeline.
+
+**Confirmed data is transactional data.** Generated suggestions can be temporary; confirmed plans and grocery lists belong in PostgreSQL and use application services to preserve invariants.
+
+**Contracts are generated, errors are standardised.** OpenAPI-generated types and Problem Details give web, mobile, tests, and future integrations one vocabulary.
+
+**Tests follow risk.** Domain rules and application services have unit tests. Authentication, plans, groceries, recipes, and AI error behaviour have real HTTP integration coverage against PostgreSQL.
+
+## What comes next
+
+The next reliability step is distributed rate limiting when the API scales beyond one replica, followed by explicit AI cost budgets, request correlation from clients through Gemini calls, and production alerts for sustained 5xx or model fallback exhaustion. Product work can then expand price comparison and restaurant discovery without weakening the plan-and-grocery core.

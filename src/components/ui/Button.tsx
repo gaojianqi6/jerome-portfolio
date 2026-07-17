@@ -6,9 +6,21 @@ type ButtonProps = {
   children: ReactNode;
   href?: string;
   variant?: "primary" | "secondary" | "ghost";
+  analyticsEvent?: string;
+  analyticsLabel?: string;
+  download?: boolean | string;
 } & ComponentPropsWithoutRef<"button">;
 
-export function Button({ children, href, variant = "primary", className, ...props }: ButtonProps) {
+export function Button({
+  children,
+  href,
+  variant = "primary",
+  className,
+  analyticsEvent,
+  analyticsLabel,
+  download,
+  ...props
+}: ButtonProps) {
   const classNames = [styles.button, styles[variant], className].filter(Boolean).join(" ");
 
   if (href) {
@@ -17,6 +29,9 @@ export function Button({ children, href, variant = "primary", className, ...prop
     return (
       <Link
         className={classNames}
+        data-analytics-event={analyticsEvent}
+        data-analytics-label={analyticsLabel}
+        download={download}
         href={href}
         target={external ? "_blank" : undefined}
         rel={external ? "noreferrer noopener" : undefined}
@@ -27,7 +42,12 @@ export function Button({ children, href, variant = "primary", className, ...prop
   }
 
   return (
-    <button className={classNames} {...props}>
+    <button
+      className={classNames}
+      data-analytics-event={analyticsEvent}
+      data-analytics-label={analyticsLabel}
+      {...props}
+    >
       {children}
     </button>
   );

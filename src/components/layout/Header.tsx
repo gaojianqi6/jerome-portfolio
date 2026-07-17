@@ -44,7 +44,13 @@ export function Header({ locale }: { locale: Locale }) {
 
       <nav className={styles.nav} aria-label="Primary navigation">
         {routeLabels[locale].map((item) => (
-          <Link key={item.href} href={item.href}>
+          <Link
+            aria-current={pathname === item.href.split("#")[0] ? "page" : undefined}
+            data-analytics-event="navigation_click"
+            data-analytics-label={item.href}
+            key={item.href}
+            href={item.href}
+          >
             {item.label}
           </Link>
         ))}
@@ -66,6 +72,8 @@ export function Header({ locale }: { locale: Locale }) {
         <a
           className={styles.iconLink}
           href={`mailto:${contact.email}`}
+          data-analytics-event="contact_click"
+          data-analytics-label="header:email"
           aria-label="Email Jerome"
           title="Email Jerome"
         >
@@ -74,6 +82,8 @@ export function Header({ locale }: { locale: Locale }) {
         <a
           className={styles.iconLink}
           href={contact.linkedin}
+          data-analytics-event="social_click"
+          data-analytics-label="linkedin:header"
           aria-label="LinkedIn"
           title="LinkedIn"
           target="_blank"
@@ -84,6 +94,8 @@ export function Header({ locale }: { locale: Locale }) {
         <a
           className={styles.iconLink}
           href={contact.github}
+          data-analytics-event="social_click"
+          data-analytics-label="github:header"
           aria-label="GitHub"
           title="GitHub"
           target="_blank"

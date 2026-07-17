@@ -28,6 +28,9 @@
       ],
       "@content/*": [
         "./content/*"
+      ],
+      "content-collections": [
+        "./.content-collections/generated"
       ]
     }
   },

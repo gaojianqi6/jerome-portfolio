@@ -1,0 +1,127 @@
+---
+title: Carsome Platform and Inventory Operations
+slug: carsome
+locale: en
+subtitle: Public commerce, internal operations, and a backend workflow service for a regional used-car platform.
+summary: I worked across a Nuxt SSR website, a multi-framework CMS, and a NestJS inventory service that kept warehouse activity and downstream systems in sync.
+client: Carsome
+kind: professional
+status: shipped
+timeframe: Apr 2021 - Nov 2023
+role: Frontend Engineer with full-stack ownership across three connected systems
+featured: true
+order: 1
+categories:
+  - Full-stack
+  - Enterprise
+  - Backend
+  - Micro-frontends
+techStack:
+  - NestJS
+  - MongoDB
+  - Redis
+  - Bull
+  - Nuxt.js
+  - React
+  - Vue 3
+  - AngularJS
+  - TypeScript
+links:
+  - label: Visit Carsome
+    href: https://carsome.my
+    type: live
+hero:
+  src: /images/projects/carsome/public-platform.jpeg
+  alt: Carsome public platform campaign artwork with three used cars
+  caption: Public-site artwork from the Carsome website codebase I worked on.
+  position: center 62%
+evidence:
+  - layer: Client
+    title: Nuxt SSR website
+    description: Responsive buying and selling journeys, reusable vehicle components, image-heavy detail pages, and server-rendered routes for search visibility.
+  - layer: Operations
+    title: CMS micro-frontends
+    description: React, Vue 3, and AngularJS modules shared TypeScript packages, API clients, UI primitives, and release conventions inside a Lerna monorepo.
+  - layer: API
+    title: NestJS inventory service
+    description: Authenticated and validated REST workflows covered check-in, transit, release, repair, stock take, QR actions, and logistics tasks.
+  - layer: Data
+    title: Vehicle aggregate in MongoDB
+    description: Each car carried its profile, activity history, task history, assignments, and denormalised latest state for fast operational reads.
+  - layer: Async
+    title: Redis and Bull integration jobs
+    description: ERP and transaction-centre side effects ran outside the request path with retry settings, failure logging, and optional failed-job persistence.
+  - layer: Operations
+    title: Health, logs, and service boundaries
+    description: Terminus health checks, Carsome APM/logging, Firebase notifications, and a transfer adapter connected the service to surrounding systems.
+architecture:
+  - step: "01"
+    title: Customer journeys
+    description: The Nuxt site handled vehicle discovery, detail, valuation, and booking experiences across desktop and mobile.
+  - step: "02"
+    title: Internal workflows
+    description: CMS modules let operations teams manage leads, inspections, photos, orders, logistics, permissions, and reporting.
+  - step: "03"
+    title: Inventory domain service
+    description: NestJS authenticated requests, validated DTOs, and applied vehicle or logistics state transitions.
+  - step: "04"
+    title: Operational state
+    description: MongoDB stored the car aggregate while Redis protected short-lived actions such as duplicate QR scans.
+  - step: "05"
+    title: Downstream sync
+    description: Bull workers updated ERP and transaction systems; transfer services and notifications connected other operational clients.
+results:
+  - Shipped three production systems spanning public web, internal operations, and backend inventory workflows.
+  - The project documentation records 200+ daily CMS users and more than 10,000 vehicles managed through the operational platform.
+  - Shared packages and release standards reduced duplication while legacy and modern modules continued to ship independently.
+---
+
+## Context
+
+Carsome was not one website. The customer-facing marketplace, the internal operations console, and the inventory service all described different parts of the same vehicle lifecycle. A seller lead could become an inspection, a listed vehicle, a warehouse activity, a logistics task, and eventually a transaction. The engineering problem was keeping those views useful without turning every team into a dependency for every release.
+
+## My role and contribution boundary
+
+My job title was Frontend Engineer, but the work crossed the frontend boundary. I built and maintained the public Nuxt experience, led shared frontend structure for the CMS, and worked directly on the NestJS inventory service. Product, design, operations, backend, mobile, and infrastructure colleagues owned their respective areas; my contribution was the web delivery, shared CMS foundations, inventory workflows, and the contracts connecting them.
+
+I also worked with an existing PHP CodeIgniter CMS. That system contained long-running operational modules for leads, inspections, pricing, bidding, reports, permissions, and integrations. The goal was not to rewrite it for fashion. We introduced newer modules and service boundaries while preserving business workflows that still carried operational value.
+
+## Three systems, one operational lifecycle
+
+### Public platform
+
+The Nuxt.js site used SSR for indexable vehicle and campaign pages, with responsive components for car cards, galleries, valuation, and booking flows. Images were lazy-loaded and layouts were designed around both wide desktop screens and mobile traffic. This layer translated complicated vehicle information into something a buyer or seller could act on.
+
+### CMS and micro-frontends
+
+The CMS combined React, Vue 3, and AngularJS modules during a period of gradual migration. A Lerna monorepo provided a practical shared layer: TypeScript types, API clients, UI components, hooks, linting, formatting, and commit checks. Individual modules could keep their own build and release path, while users experienced one operations console.
+
+### Inventory service
+
+The NestJS service modelled inventory as a workflow rather than a CRUD list. It handled check-in, verification, transit, transfer, release, repair, discard, stock take, QR generation and verification, task assignment, and notifications. Controllers stayed at the transport boundary; services applied the business transition and coordinated persistence or side effects.
+
+## Data and concurrency decisions
+
+MongoDB matched the main read pattern: operators usually needed one vehicle's current state and history. A car document held `carInfo`, `activities`, `tasks`, assignments, logs, and cached `lastActivity` / `lastTask` fields. The denormalised latest fields made warehouse lists fast, while the arrays preserved an auditable timeline.
+
+That choice moved responsibility into the write path. The service had to update history and current-state snapshots together, guard invalid task transitions, and control concurrent edits. QR actions used Redis keys with a TTL to stop duplicate scans. Integration jobs could carry a stable job ID so retries did not become invisible duplicate work.
+
+## Service-to-service communication
+
+Not every downstream update belonged in the user's request. ERP callbacks and transaction-status patches were placed on Bull queues backed by Redis. Workers handled the integration, logged failures, and could persist failed job metadata for operational review. A transfer service called a separate Go transport API behind a consistent adapter, including internal authentication and error mapping.
+
+This separation kept warehouse actions responsive and made dependency failures easier to isolate. It also exposed the next engineering steps clearly: correlation IDs across HTTP and queue jobs, explicit dead-letter and replay tooling, stronger idempotency contracts, and queue-age alerts.
+
+## Technical decisions
+
+**Evolve instead of rewriting.** Multiple frameworks and the PHP CMS were a constraint, not a portfolio trick. Shared contracts and independent builds created a migration path without freezing delivery.
+
+**Model the car as the aggregate.** The activity-rich MongoDB document made current state and history available together. If timelines grew beyond practical document size, older activities could be archived without changing the operational read model.
+
+**Move external side effects off the request path.** Redis and Bull made ERP and transaction updates retryable and observable without making an operator wait for every dependency.
+
+**Treat operations as a product.** Validation, permissions, health checks, logs, failed-job visibility, and predictable error mapping were part of the workflow, not backend polish added after launch.
+
+## What I would strengthen today
+
+I would add OpenTelemetry correlation across the gateway, API, MongoDB, queues, and transfer calls; split liveness from readiness; document compound indexes against real query shapes; and provide dead-letter replay tooling with explicit owners. The underlying design remains useful: one clear inventory domain, thin transport layers, async side effects, and clients built around stable contracts.

@@ -1,0 +1,127 @@
+---
+title: Carsome 平台与库存运营系统
+slug: carsome
+locale: zh
+subtitle: 面向区域二手车业务的官网、内部运营平台和后端工作流服务。
+summary: 我参与了 Nuxt SSR 官网、多框架 CMS，以及连接仓库操作和下游系统的 NestJS 库存服务，覆盖从用户界面到数据与异步任务的完整链路。
+client: Carsome
+kind: professional
+status: shipped
+timeframe: 2021 年 4 月 - 2023 年 11 月
+role: Frontend Engineer，实际工作覆盖三个相连系统的全栈交付
+featured: true
+order: 1
+categories:
+  - 全栈
+  - 企业系统
+  - 后端
+  - 微前端
+techStack:
+  - NestJS
+  - MongoDB
+  - Redis
+  - Bull
+  - Nuxt.js
+  - React
+  - Vue 3
+  - AngularJS
+  - TypeScript
+links:
+  - label: 访问 Carsome
+    href: https://carsome.my
+    type: live
+hero:
+  src: /images/projects/carsome/public-platform.jpeg
+  alt: Carsome 官网活动画面，展示三辆二手车
+  caption: 来自我参与开发的 Carsome 官网代码库中的公开页面素材。
+  position: center 62%
+evidence:
+  - layer: 客户端
+    title: Nuxt SSR 官网
+    description: 覆盖买车、卖车、车辆详情和预约流程，使用可复用组件、响应式布局和服务端渲染支持搜索与性能。
+  - layer: 运营端
+    title: CMS 微前端
+    description: React、Vue 3 和 AngularJS 模块在 Lerna Monorepo 中共享 TypeScript 类型、API Client、UI 组件和发布规范。
+  - layer: API
+    title: NestJS 库存服务
+    description: 经过鉴权和校验的 REST 工作流覆盖入库、运输、出库、维修、盘点、二维码和物流任务。
+  - layer: 数据
+    title: MongoDB 车辆聚合
+    description: 每辆车保存车辆信息、活动历史、任务历史、分配记录和最新状态快照，支持运营页面快速读取。
+  - layer: 异步
+    title: Redis 与 Bull 集成任务
+    description: ERP 和交易中心更新脱离请求主链路执行，包含重试配置、失败日志和可选的失败任务持久化。
+  - layer: 运行
+    title: 健康检查、日志与服务边界
+    description: Terminus、Carsome APM/日志、Firebase 通知和 Transfer Adapter 把库存服务接入周边系统。
+architecture:
+  - step: "01"
+    title: 用户流程
+    description: Nuxt 官网承载车辆浏览、详情、估价和预约，并同时适配桌面和移动端。
+  - step: "02"
+    title: 内部运营
+    description: CMS 支持线索、检测、照片、订单、物流、权限和报表等运营工作流。
+  - step: "03"
+    title: 库存领域服务
+    description: NestJS 完成鉴权、DTO 校验，并执行车辆或物流状态迁移。
+  - step: "04"
+    title: 运营状态
+    description: MongoDB 保存车辆聚合，Redis 保护二维码重复扫描等短时操作。
+  - step: "05"
+    title: 下游同步
+    description: Bull Worker 更新 ERP 和交易系统，Transfer Service 与通知模块连接其他服务和客户端。
+results:
+  - 上线并维护官网、内部运营端和库存后端三个生产系统。
+  - 项目资料记录 CMS 有 200+ 日常用户，并承载 10,000+ 辆车的运营管理。
+  - 通过共享包和发布规范减少重复，同时让新旧模块保持独立交付。
+---
+
+## 项目背景
+
+Carsome 不是一个单独的网站。用户看到的交易平台、内部员工使用的运营系统，以及仓库和物流依赖的库存服务，都在描述同一辆车生命周期的不同部分。一条卖车线索可能继续进入检测、上架、仓库活动、物流任务和交易流程。真正的工程问题，是让这些视角保持一致，又不让每个团队的每次发布都彼此阻塞。
+
+## 我的职责与贡献边界
+
+我的职位名称是 Frontend Engineer，但实际工作越过了前端边界。我开发和维护 Nuxt 官网，主导 CMS 的共享前端结构，也直接参与 NestJS Inventory Service。产品、设计、运营、后端、移动端和基础设施同事各自负责相应领域；我的主要贡献是 Web 交付、CMS 共享基础、库存工作流，以及连接这些部分的接口契约。
+
+我还接触和维护过既有的 PHP CodeIgniter CMS。它长期承载线索、检测、定价、竞拍、报表、权限与外部集成。这里的目标不是为了换技术而重写，而是在保留有效业务流程的同时，逐步引入新模块和更清晰的服务边界。
+
+## 三个系统，一条运营链路
+
+### 面向客户的官网
+
+Nuxt.js 官网通过 SSR 支持可索引的车辆页和活动页，并提供车辆卡片、图库、估价与预约等响应式组件。图片采用延迟加载，布局同时考虑宽屏桌面与移动端流量。这一层把复杂车辆信息转化成买家或卖家能够采取行动的界面。
+
+### CMS 与微前端
+
+CMS 在渐进迁移阶段同时存在 React、Vue 3 和 AngularJS 模块。Lerna Monorepo 提供共享的 TypeScript 类型、API Client、UI 组件、Hooks、Lint、Format 和提交检查。每个模块保留独立构建和发布能力，但对运营人员仍表现为一个统一工作台。
+
+### Inventory Service
+
+NestJS 服务把库存理解为工作流，而不是一张 CRUD 表。它处理入库、验证、运输、调拨、出库、维修、报废、盘点、二维码生成与验证、任务分配和通知。Controller 保持在传输边界，Service 负责业务状态迁移，并协调持久化和外部副作用。
+
+## 数据与并发设计
+
+MongoDB 符合主要读取模式：运营人员通常需要知道一辆车现在在哪里、之前发生过什么、下一步是什么。Car Document 保存 `carInfo`、`activities`、`tasks`、分配信息、日志，以及 `lastActivity` / `lastTask` 状态快照。最新状态字段让仓库列表读取更快，数组则保留完整时间线。
+
+这个选择把更多责任放到了写入路径。服务需要同时维护历史与当前状态，阻止非法任务迁移，并处理并发修改。二维码操作使用带 TTL 的 Redis Key 阻止短时间重复扫描；异步任务可以携带稳定 Job ID，让重试不会悄悄制造重复业务动作。
+
+## 服务之间如何通知
+
+并不是每个下游更新都应该让用户等待。ERP 回调和交易状态更新进入 Redis 支撑的 Bull Queue，由 Worker 执行集成、记录失败，并在需要时保存失败任务信息供运营排查。Transfer Service 通过统一 Adapter 调用独立的 Go Transport API，包含内部鉴权和错误映射。
+
+这种拆分让仓库操作保持响应，也让依赖故障更容易隔离。它同时暴露出下一步改进方向：HTTP 与 Queue Job 之间贯通 Correlation ID、明确的 Dead Letter 和 Replay 工具、更严格的幂等契约，以及 Queue Age 告警。
+
+## 关键技术决策
+
+**演进，而不是强行重写。** 多框架和 PHP CMS 是现实约束，不是为了展示技术数量。共享契约和独立构建让迁移能够继续，同时不冻结业务交付。
+
+**以车辆作为聚合根。** 活动信息丰富的 MongoDB Document 能同时提供当前状态和历史。若时间线增长到不适合继续嵌入，可以归档旧活动，而不改变主要运营读取模型。
+
+**把外部副作用移出请求主链路。** Redis 与 Bull 让 ERP 和交易更新可以重试、记录和观察，同时不让一线运营人员等待所有外部依赖。
+
+**把内部运营也当成产品。** 校验、权限、健康检查、日志、失败任务可见性和稳定错误映射不是上线后的修饰，而是工作流的一部分。
+
+## 现在会如何加强
+
+我会补充贯穿 Gateway、API、MongoDB、Queue 与 Transfer Call 的 OpenTelemetry；拆分 Liveness 与 Readiness；根据真实查询模式记录并验证组合索引；为失败任务提供有责任人和审计记录的 Replay 工具。核心方向仍然有效：清晰的库存领域、轻薄的传输层、异步副作用和稳定客户端契约。

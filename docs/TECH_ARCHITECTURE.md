@@ -1,5 +1,13 @@
 # Jerome Portfolio Technical Architecture
 
+## V1 实现状态（2026-07-17）
+
+- `content/projects/[slug]/en.mdx|zh.mdx` 通过 Content Collections 的 Zod schema 生成类型化数据，当前包含 4 组、8 篇内容。
+- `[locale]/projects/[slug]` 使用同一个 Case Study 模板静态生成；locale 切换保留当前 slug。
+- metadata、canonical、hreflang、Open Graph、CreativeWork / Person JSON-LD、sitemap、robots 和 404 已进入站点层。
+- analytics 使用无供应商耦合的 `data-analytics-event` 契约，可接 Plausible 或 gtag；未配置供应商时不发送数据。
+- V1 不实现项目筛选。单元测试覆盖内容完整性和 React 链接行为，Playwright 覆盖桌面与移动关键路径。
+
 ## 1. 技术目标
 
 这个项目不是一个重后端系统，而是一个高度打磨的双语 Portfolio 前端产品。技术架构要服务三个目标：
@@ -56,7 +64,7 @@ Build time content -> Static HTML/RSC payload -> Fast SEO-friendly pages
 - analytics event。
 - copy email toast。
 - language switch preserving current route。
-- project filter。
+- project filter（项目超过 6 个后再启用）。
 - interactive evidence rail。
 
 ### Content-driven

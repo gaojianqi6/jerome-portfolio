@@ -14,11 +14,11 @@ export function Footer({ locale }: { locale: Locale }) {
         </span>
       </div>
       <nav aria-label="Footer links">
-        <a href={`mailto:${contact.email}`}>{contact.email}</a>
-        <a href={contact.linkedin} target="_blank" rel="noreferrer noopener">
+        <a data-analytics-event="contact_click" data-analytics-label="footer:email" href={`mailto:${contact.email}`}>{contact.email}</a>
+        <a data-analytics-event="social_click" data-analytics-label="linkedin:footer" href={contact.linkedin} target="_blank" rel="noreferrer noopener">
           LinkedIn
         </a>
-        <a href={contact.github} target="_blank" rel="noreferrer noopener">
+        <a data-analytics-event="social_click" data-analytics-label="github:footer" href={contact.github} target="_blank" rel="noreferrer noopener">
           GitHub
         </a>
       </nav>

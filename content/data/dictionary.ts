@@ -1,15 +1,5 @@
 import type { Locale } from "@/lib/i18n";
 
-export type Project = {
-  slug: string;
-  title: string;
-  summary: Record<Locale, string>;
-  tags: Record<Locale, string[]>;
-  status: Record<Locale, string>;
-  year: string;
-  featured?: boolean;
-};
-
 type HomeProject = {
   name: string;
   meta: string;
@@ -17,13 +7,17 @@ type HomeProject = {
   body: string;
   proof: string[];
   href?: string;
+  slug?: string;
 };
 
 export const contact = {
   email: "gaojianqi6@gmail.com",
   github: "https://github.com/gaojianqi6",
   linkedin: "https://linkedin.com/in/jianqi6",
-  cv: "/cv.pdf",
+  cv: {
+    en: "/files/cv.pdf",
+    zh: "/files/cv-CN.pdf",
+  },
 };
 
 export const homeCopy = {
@@ -98,7 +92,7 @@ export const homeHighlights = {
   ],
 } satisfies Record<Locale, Array<{ label: string; value: string }>>;
 
-export const homeProjects = {
+export const homeProjects: Record<Locale, HomeProject[]> = {
   en: [
     {
       name: "Carsome",
@@ -107,7 +101,7 @@ export const homeProjects = {
       body:
         "Delivered the public platform, CMS micro-frontends, shared UI packages, and a NestJS inventory service with WebSocket updates and optimistic concurrency for vehicle operations.",
       proof: ["10K+ vehicles managed", "200+ daily CMS users", "Monorepo standards"],
-      href: "https://carsome.my",
+      slug: "carsome",
     },
     {
       name: "Pintec / Xuanji Investment",
@@ -116,6 +110,7 @@ export const homeProjects = {
       body:
         "Built a robo-advisor across React web, mobile web, and React Native, with a Node.js + Express API/BFF layer supporting authentication, validation, KYC, risk profiling, portfolio, and rebalance workflows.",
       proof: ["Cross-platform investment app", "Approx. 80% business-logic reuse", "Express API / BFF"],
+      slug: "pintec",
     },
     {
       name: "Buy It Mall / GouTa Mall",
@@ -142,7 +137,7 @@ export const homeProjects = {
       body:
         "交付官网、CMS 微前端和共享组件库，也开发 NestJS 库存服务，用 WebSocket 和乐观并发处理车辆库存、照片、状态和操作流。",
       proof: ["10K+ 车辆管理", "200+ CMS 日活用户", "Monorepo 规范"],
-      href: "https://carsome.my",
+      slug: "carsome",
     },
     {
       name: "Pintec / 玄极智能投顾",
@@ -151,6 +146,7 @@ export const homeProjects = {
       body:
         "构建覆盖 React Web、移动 Web 和 React Native 的智能投顾产品，并参与 Node.js + Express API/BFF 层，支撑鉴权、验证、KYC、风险测评、投资组合和再平衡流程。",
       proof: ["跨平台投资 App", "约 80% 业务逻辑复用", "Express API / BFF"],
+      slug: "pintec",
     },
     {
       name: "购它商城 / Buy It Mall",
@@ -169,9 +165,9 @@ export const homeProjects = {
       proof: ["实时多人同步", "跨设备游戏状态", "Supabase + PostgreSQL"],
     },
   ],
-} satisfies Record<Locale, HomeProject[]>;
+};
 
-export const homeSideProjects = {
+export const homeSideProjects: Record<Locale, HomeProject[]> = {
   en: [
     {
       name: "Mealway",
@@ -180,7 +176,7 @@ export const homeSideProjects = {
       body:
         "AI meal planning product with typed REST APIs, Firebase auth, resilient Gemini workflows, structured logs, Docker, Azure Container Apps, Key Vault, and Application Insights.",
       proof: [".NET REST backend", "AI workflow reliability", "Azure production path"],
-      href: "https://mealway.io",
+      slug: "mealway",
     },
     {
       name: "Osprey Pulse",
@@ -209,7 +205,7 @@ export const homeSideProjects = {
       body:
         "AI 饮食计划产品，包含类型化 REST API、Firebase 鉴权、Gemini 工作流容错、结构化日志、Docker、Azure Container Apps、Key Vault 和 Application Insights。",
       proof: [".NET REST 后端", "AI 工作流可靠性", "Azure 生产化路径"],
-      href: "https://mealway.io",
+      slug: "mealway",
     },
     {
       name: "Osprey Pulse",
@@ -230,7 +226,7 @@ export const homeSideProjects = {
       href: "https://rating.ospreypulse.com",
     },
   ],
-} satisfies Record<Locale, HomeProject[]>;
+};
 
 export const evidenceNarrative = {
   en: [
@@ -317,61 +313,6 @@ export const experienceTimeline = {
   ],
 } satisfies Record<Locale, Array<[string, string, string]>>;
 
-export const projects: Project[] = [
-  {
-    slug: "rate-everything",
-    title: "RateEverything",
-    summary: {
-      en: "A full-stack rating platform spanning Next.js, NestJS, FastAPI, PostgreSQL, testing, and deployment.",
-      zh: "覆盖 Next.js、NestJS、FastAPI、PostgreSQL、测试和部署的全栈评分平台。",
-    },
-    tags: {
-      en: ["Full-stack", "Product", "Next.js"],
-      zh: ["全栈", "产品", "Next.js"],
-    },
-    status: {
-      en: "Case study scaffold",
-      zh: "案例骨架",
-    },
-    year: "2026",
-    featured: true,
-  },
-  {
-    slug: "te-kemu-arapu",
-    title: "Te Kemu Arapu",
-    summary: {
-      en: "A language-learning experience that can show interaction design, accessibility, and content structure.",
-      zh: "可展示交互设计、可访问性和内容结构的语言学习体验。",
-    },
-    tags: {
-      en: ["Full-stack", "Realtime", "React Native"],
-      zh: ["全栈", "实时系统", "React Native"],
-    },
-    status: {
-      en: "Content pending",
-      zh: "内容待补",
-    },
-    year: "2025",
-  },
-  {
-    slug: "delivery-platform",
-    title: "Delivery Platform",
-    summary: {
-      en: "A placeholder for enterprise delivery work: API boundaries, operational flows, and reliability tradeoffs.",
-      zh: "企业交付项目占位：API 边界、运营流程和可靠性取舍。",
-    },
-    tags: {
-      en: ["Enterprise", "API", "Ops"],
-      zh: ["企业系统", "API", "运营"],
-    },
-    status: {
-      en: "Evidence to add",
-      zh: "证据待补",
-    },
-    year: "2024",
-  },
-];
-
 export const evidenceSteps = {
   en: ["UI", "State", "API", "Data", "Tests", "Deploy"],
   zh: ["界面", "状态", "API", "数据", "测试", "部署"],
@@ -391,36 +332,3 @@ export const skillGroups = {
     { title: "质量保障", items: ["测试", "性能", "可维护性", "文档"] },
   ],
 } satisfies Record<Locale, Array<{ title: string; items: string[] }>>;
-
-export const pageCopy = {
-  projects: {
-    en: {
-      title: "Full Stack Projects",
-      body: "Professional work and independent products across backend services, data, cloud delivery, web, and mobile clients.",
-    },
-    zh: {
-      title: "全栈项目",
-      body: "覆盖后端服务、数据、云交付、Web 和移动端的职业项目与独立产品。",
-    },
-  },
-  about: {
-    en: {
-      title: "About a Full Stack Engineer",
-      body: "My main direction is Node.js full-stack engineering, supported by .NET, Python, Java, data, cloud, and strong frontend delivery.",
-    },
-    zh: {
-      title: "关于一名全栈工程师",
-      body: "以 Node.js 全栈工程为主要方向，同时覆盖 .NET、Python、Java、数据、云和扎实的前端交付。",
-    },
-  },
-  contact: {
-    en: {
-      title: "Contact a Full Stack Engineer",
-      body: "Open to New Zealand-based and global remote Full Stack Engineer opportunities. Reach me by email, LinkedIn, or GitHub.",
-    },
-    zh: {
-      title: "联系一名全栈工程师",
-      body: "寻找中国、新西兰本地工作和全球远程的 Full Stack Engineer 机会，可通过 Email、LinkedIn 或 GitHub 联系。",
-    },
-  },
-} satisfies Record<string, Record<Locale, { title: string; body: string }>>;

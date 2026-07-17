@@ -1,0 +1,134 @@
+---
+title: Xuanji Intelligent Investment
+slug: pintec
+locale: en
+subtitle: An API-first investment product delivered across React web, mobile web, React Native, and partner-bank experiences.
+summary: I worked from Node.js and Express APIs backed by MySQL through to onboarding, KYC, risk assessment, portfolio, and rebalance flows on web and mobile.
+client: Pintec
+kind: professional
+status: shipped
+timeframe: Jun 2018 - Feb 2020
+role: Full-stack contribution across Express, MySQL, React, React Native, and shared product logic
+featured: true
+order: 2
+categories:
+  - Full-stack
+  - Fintech
+  - Cross-platform
+  - Node.js
+techStack:
+  - Node.js
+  - Express
+  - MySQL
+  - React
+  - React Native
+  - Redux
+  - React Router
+  - React Navigation
+  - Jest
+links: []
+hero:
+  src: /images/projects/pintec/investment-mobile.jpeg
+  alt: A person using an investment application on a smartphone
+  caption: Context image representing the mobile investment experience; the original product is no longer public.
+  creditLabel: Liza Summer / Pexels
+  creditHref: https://www.pexels.com/photo/crop-dealer-touching-screen-on-smartphone-with-trading-application-6347705/
+  position: center 48%
+evidence:
+  - layer: UI
+    title: Web and native product journeys
+    description: React and React Native clients covered onboarding, risk questions, KYC states, allocation views, portfolio performance, and rebalance actions.
+  - layer: State
+    title: Shared Redux business logic
+    description: Actions, reducers, selectors, API models, validation rules, and workflow decisions were shared while browser and native presentation stayed separate.
+  - layer: API
+    title: Node.js and Express BFF
+    description: The API layer authenticated callers, validated product requests, normalised investment-domain responses, and served first-party and bank clients.
+  - layer: Data
+    title: MySQL source of truth
+    description: Relational records covered users, accounts, products, risk profiles, portfolio versions, orders, and audit-relevant state.
+  - layer: Integration
+    title: Narrow algorithm boundary
+    description: Most business data came from MySQL; selected portfolio construction or adjustment requests called a specialist algorithm service through an adapter.
+  - layer: Platform
+    title: Partner-bank contracts
+    description: Banks could keep their own interface while consuming versioned portfolio APIs, making authentication, compatibility, errors, and traceability part of the product.
+architecture:
+  - step: "01"
+    title: React web, React Native, and bank clients
+    description: Each channel owned its presentation and navigation but followed the same investment-domain contract.
+  - step: "02"
+    title: Express middleware and routes
+    description: Authentication, authorisation, validation, request context, and consistent errors protected the product API.
+  - step: "03"
+    title: Domain services
+    description: User, risk, portfolio, order, KYC, and partner use cases stayed separate from HTTP response handling.
+  - step: "04"
+    title: MySQL
+    description: Durable relational state remained authoritative for profiles, portfolio records, and investment actions.
+  - step: "05"
+    title: Specialist integrations
+    description: Algorithm, native capabilities, and partner-bank adapters were called only at explicit system boundaries.
+results:
+  - Delivered one investment product across React web, mobile web, and React Native rather than three disconnected implementations.
+  - Reused approximately 80% of business logic through shared Redux and domain packages while preserving platform-specific UI and navigation.
+  - The same backend capability could support first-party clients and partner banks with their own presentation layer.
+---
+
+## Product context
+
+Xuanji was a robo-advisor-style product. A user moved from account onboarding into risk assessment, received a recommended allocation, reviewed portfolio performance, completed identity steps, and could request investment actions such as rebalancing. Financial information had to be understandable, but the interface also had to make restrictions, pending states, failures, and confirmations unambiguous.
+
+The product eventually served more than one presentation layer. React powered the browser experience, React Native powered the mobile applications, and partner banks could use their own interface against the same product capability. That made the backend contract a long-lived platform surface rather than an implementation detail of one app.
+
+## My role and boundaries
+
+I worked across the Node.js and Express service, MySQL-backed product data, React web, React Native, Redux architecture, and native integration points. I collaborated with product, design, native iOS/Android engineers, QA, infrastructure, algorithm specialists, and bank-integration teams.
+
+The specialist team owned the mathematical investment model. My responsibility was to integrate selected algorithm outputs safely into the product, not to claim authorship of the model itself. Most normal requests were served by Express and MySQL; the algorithm boundary stayed narrow and explicit.
+
+## The user journey as a full-stack flow
+
+### Onboarding and risk assessment
+
+The client collected account and suitability information in staged flows with validation and recoverable state. Express validated requests again, loaded product data from MySQL, and returned a stable risk-profile result. The server remained authoritative; client validation improved the experience but did not decide financial correctness.
+
+### Portfolio and allocation
+
+React selectors converted API data into focused view models for allocation charts, performance summaries, and status messages. The UI did not need to understand the complete database model. Selected portfolio construction or adjustment operations went through an algorithm adapter, then returned to the same product contract used by web, mobile, and bank clients.
+
+### KYC and protected actions
+
+Mobile flows integrated camera capture, biometric login, and push notifications with native engineers. The shared layer handled workflow state, validation, API models, and error interpretation; native modules handled device permissions and secure platform capabilities. Sensitive submissions needed duplicate-action protection, server-side validation, and a clear audit trail.
+
+## What “80% reuse” means
+
+The reuse was not 80% identical UI. Browser routes, tables, hover behaviour, mobile navigation, touch controls, and native permissions are different concerns. We shared the parts that should mean the same thing everywhere:
+
+- Redux actions, reducers, and selectors.
+- API request and response models.
+- Validation rules and workflow decisions.
+- Authentication state and error interpretation.
+- Portfolio data transformations and status logic.
+
+React web and React Native then rendered platform-appropriate components around that common core. This kept product behaviour aligned without forcing a browser component to pretend it was a native screen.
+
+## Express and MySQL responsibilities
+
+The Express layer acted as an API/BFF boundary. It authenticated first-party or partner callers, validated input, applied product rules, called MySQL repositories, translated integration failures, and returned stable responses. MySQL was a better fit than client state for durable relationships among users, accounts, products, profiles, portfolio versions, and order-related records.
+
+For write operations, the important concerns were transactions, idempotency, and compatibility. A disabled button could improve UX, but only server-side uniqueness and transaction rules could prevent duplicate financial actions. API changes also had to tolerate mobile clients that could not upgrade immediately and banks that required an agreed migration window.
+
+## Technical decisions
+
+**Share behaviour, not rendering.** Common Redux and domain packages protected consistency; platform-specific UI preserved usability and performance.
+
+**Keep the algorithm behind an adapter.** The product API owned authentication, suitability context, persistence, errors, and response shape. The specialist service supplied selected calculations.
+
+**Design for more than one client.** Versioned contracts, partner identity, scopes, audit context, and compatible changes were necessary because banks controlled their own experience.
+
+**Keep financial truth on the server.** Client calculations could support display, but authoritative portfolio, KYC, and action state came from backend services and MySQL.
+
+## What I would strengthen today
+
+I would use end-to-end TypeScript contracts or schema generation, RFC 9457 Problem Details, explicit idempotency keys, stronger integration tests around MySQL transactions, and OpenTelemetry across Express, database, cache, and algorithm calls. I would keep the original architectural choice: shared domain behaviour, platform-native presentation, and a backend contract strong enough to support clients outside our own codebase.
