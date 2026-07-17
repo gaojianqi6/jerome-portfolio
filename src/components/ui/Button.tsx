@@ -12,8 +12,15 @@ export function Button({ children, href, variant = "primary", className, ...prop
   const classNames = [styles.button, styles[variant], className].filter(Boolean).join(" ");
 
   if (href) {
+    const external = /^https?:\/\//.test(href);
+
     return (
-      <Link className={classNames} href={href}>
+      <Link
+        className={classNames}
+        href={href}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noreferrer noopener" : undefined}
+      >
         {children}
       </Link>
     );

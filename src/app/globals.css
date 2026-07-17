@@ -3,17 +3,14 @@
 @import "../styles/motion.css";
 
 body {
-  background:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
-    var(--color-bg);
-  background-size: 32px 32px;
+  background: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-sans);
 }
 
 main {
   min-height: 100svh;
+  padding-top: var(--header-height);
 }
 
 ::selection {

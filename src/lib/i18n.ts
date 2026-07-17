@@ -1,4 +1,5 @@
 export const locales = ["en", "zh"] as const;
+export const localeCookieName = "jerome_locale";
 
 export type Locale = (typeof locales)[number];
 
@@ -16,6 +17,10 @@ export const htmlLang: Record<Locale, string> = {
 
 export function isLocale(value: string): value is Locale {
   return locales.includes(value as Locale);
+}
+
+export function getPreferredLocale(value?: string): Locale {
+  return value === "zh" ? "zh" : "en";
 }
 
 export function swapLocale(pathname: string, nextLocale: Locale) {

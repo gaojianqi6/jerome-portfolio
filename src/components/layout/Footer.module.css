@@ -10,7 +10,35 @@
   padding: 2rem var(--page-gutter);
 }
 
+.footer div {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.footer strong {
+  color: var(--color-ink);
+  font-weight: 800;
+}
+
+.footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: flex-end;
+}
+
 .footer a {
   color: var(--color-ink);
   font-weight: 800;
+}
+
+@media (max-width: 720px) {
+  .footer {
+    align-items: flex-start;
+    display: grid;
+  }
+
+  .footer nav {
+    justify-content: flex-start;
+  }
 }

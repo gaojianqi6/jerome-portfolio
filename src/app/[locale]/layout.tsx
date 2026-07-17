@@ -7,11 +7,11 @@ import "../globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Jerome Gao Portfolio",
+    default: "Jerome Gao | Full Stack Engineer",
     template: "%s / Jerome Gao",
   },
   description:
-    "A bilingual portfolio for Jerome Gao, focused on full-stack evidence, product-minded engineering, and maintainable frontend structure.",
+    "Jerome Gao is a Node.js Full Stack Engineer working across backend services, data, cloud delivery, React, Next.js, React Native, .NET, Python, and Java.",
 };
 
 export function generateStaticParams() {

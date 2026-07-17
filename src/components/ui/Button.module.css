@@ -8,8 +8,8 @@
   gap: 0.55rem;
   justify-content: center;
   line-height: 1;
-  min-height: 2.75rem;
-  padding: 0 1rem;
+  min-height: 2.55rem;
+  padding: 0 0.9rem;
   text-decoration: none;
   transition:
     transform var(--motion-fast) var(--ease-standard),
@@ -28,7 +28,7 @@
 
 .primary {
   background: var(--color-signal-blue);
-  color: var(--color-ink-inverse);
+  color: #07111f;
 }
 
 .secondary {
