@@ -9,14 +9,22 @@ describe("project content", () => {
     );
   });
 
-  it("publishes the three primary case studies with full-stack evidence", () => {
-    for (const slug of ["carsome", "pintec", "mealway"]) {
+  it("publishes the primary case studies with full-stack evidence", () => {
+    for (const slug of ["carsome", "pintec", "osprey-pulse", "mealway"]) {
       const project = getProject("en", slug);
       expect(project).toBeDefined();
       expect(project?.evidence.length).toBeGreaterThanOrEqual(4);
       expect(project?.architecture.length).toBeGreaterThanOrEqual(3);
       expect(project?.results.length).toBeGreaterThanOrEqual(3);
     }
+  });
+
+  it("orders independent products around the current product focus", () => {
+    expect(
+      getProjects("en")
+        .filter((project) => project.kind === "independent")
+        .map((project) => project.slug),
+    ).toEqual(["osprey-pulse", "mealway", "rate-everything"]);
   });
 
   it("keeps Carsome's public URL inside its case study", () => {

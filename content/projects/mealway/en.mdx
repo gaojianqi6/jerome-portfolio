@@ -10,7 +10,7 @@ status: live
 timeframe: Apr 2026 - Present
 role: Independent Full Stack Engineer and product owner
 featured: true
-order: 3
+order: 2
 categories:
   - Full-stack
   - .NET
@@ -119,6 +119,6 @@ Serilog writes structured request and application events. Azure Container Apps p
 
 **Tests follow risk.** Domain rules and application services have unit tests. Authentication, plans, groceries, recipes, and AI error behaviour have real HTTP integration coverage against PostgreSQL.
 
-## What comes next
+## Scaling boundaries
 
-The next reliability step is distributed rate limiting when the API scales beyond one replica, followed by explicit AI cost budgets, request correlation from clients through Gemini calls, and production alerts for sustained 5xx or model fallback exhaustion. Product work can then expand price comparison and restaurant discovery without weakening the plan-and-grocery core.
+The shipped API runs with a deliberately lightweight production policy. Scaling beyond one replica changes the reliability boundary: rate limiting must become distributed, AI usage needs explicit cost budgets, request correlation must reach Gemini calls, and sustained 5xx or exhausted model routes need alerts. The plan-and-grocery domain remains isolated from those infrastructure choices.

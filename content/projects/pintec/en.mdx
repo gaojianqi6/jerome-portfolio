@@ -129,6 +129,6 @@ For write operations, the important concerns were transactions, idempotency, and
 
 **Keep financial truth on the server.** Client calculations could support display, but authoritative portfolio, KYC, and action state came from backend services and MySQL.
 
-## What I would strengthen today
+## Engineering perspective
 
-I would use end-to-end TypeScript contracts or schema generation, RFC 9457 Problem Details, explicit idempotency keys, stronger integration tests around MySQL transactions, and OpenTelemetry across Express, database, cache, and algorithm calls. I would keep the original architectural choice: shared domain behaviour, platform-native presentation, and a backend contract strong enough to support clients outside our own codebase.
+The original architectural choice remains sound: shared domain behaviour, platform-native presentation, and a backend contract strong enough to support clients outside our own codebase. In a modern implementation, the same boundaries map naturally to generated TypeScript contracts, RFC 9457 Problem Details, explicit idempotency keys, MySQL transaction integration tests, and end-to-end telemetry across Express, storage, cache, and algorithm calls.

@@ -1,0 +1,121 @@
+---
+title: Osprey Pulse
+slug: osprey-pulse
+locale: zh
+subtitle: "已上线的 AI 目标陪伴产品：把一个重要目标转成可编辑的每日计划，让用户的宠物伙伴动动随着每日进度一起成长。"
+summary: 我从双语 Next.js 与 Expo 体验开始，一直交付到 ASP.NET Core API、结构化 AI 计划、PostgreSQL 数据模型、自动化测试、Android 预览版，以及由 OpenTofu 和 Ansible 管理的生产发布链路。
+client: 独立产品
+kind: independent
+status: live
+timeframe: 2026 年至今
+role: 独立 Full Stack Engineer 与产品负责人
+featured: true
+order: 1
+categories:
+  - 全栈
+  - AI 产品
+  - 跨端
+  - 基础设施
+techStack:
+  - ASP.NET Core 10
+  - EF Core
+  - PostgreSQL
+  - Gemini
+  - Next.js 16
+  - Expo
+  - TypeScript
+  - OpenAPI
+  - Docker
+  - OpenTofu
+  - Ansible
+  - Cloudflare
+  - Azure
+links:
+  - label: 打开 Osprey Pulse
+    href: https://www.ospreypulse.com
+    type: live
+  - label: 下载 Android 预览版
+    href: https://www.ospreypulse.com/download
+    type: external
+hero:
+  src: /images/projects/osprey-pulse/osprey-home.png
+  alt: Osprey Pulse 网站展示可编辑的每日目标、进度与宠物伙伴动动
+  caption: 产品现在以 AI 计划、目标成长和宠物陪伴为核心，不再主打体育预测与评分。
+  position: center top
+evidence:
+  - layer: 产品
+    title: 目标优先的 Web 与移动体验
+    description: Next.js 与 Expo 围绕同一条清晰循环展开——描述目标、检查计划、完成今天的一步、让宠物伙伴动动成长，并完整支持英文与简体中文。
+  - layer: 契约
+    title: 自动生成的客户端契约
+    description: OpenAPI 生成 TypeScript 类型、Zod Schema 和 Fetch SDK；RFC 9457 Problem Details 为所有客户端提供稳定的错误语言。
+  - layer: API
+    title: Clean Architecture .NET 服务
+    description: ASP.NET Core Minimal API 保持 HTTP 层轻薄，由应用 Handler 与领域实体负责目标、计划版本、每日快照、打卡、XP、Journey 和宠物规则。
+  - layer: AI
+    title: 结构化计划与 Fallback
+    description: Gemini Route 在限流与用量控制下返回类型化计划；Provider 不可用或响应无效时，服务端校验过的模板仍能保证流程可用。
+  - layer: 数据与质量
+    title: 可追溯进度与真实 PostgreSQL 测试
+    description: EF Core Migration 持久化目标和 Append-only 进度；幂等写入保护 XP，xUnit、Testcontainers 与 Respawn 使用 PostgreSQL 覆盖 API。
+  - layer: 交付
+    title: 基础设施与发布即代码
+    description: OpenTofu 创建 Azure 与 Cloudflare 资源，Ansible 配置并发布 VM Stack，GitHub Actions 推送 GHCR Image，R2 承载产品媒体与 Android 预览版。
+architecture:
+  - step: "01"
+    title: Next.js Web 与 Expo Mobile
+    description: 平台保留各自 UI，同时共享设计 Token、国际化、API 基础设施、Query State 与生成契约，不用 Web UI 强套 Native。
+  - step: "02"
+    title: 版本化 REST 契约
+    description: OpenAPI 生成客户端通过稳定的 /api/v1 Endpoint 发起鉴权请求，并把类型化错误转成可恢复的界面状态。
+  - step: "03"
+    title: ASP.NET Core 应用与领域
+    description: 身份认证、计划生成、每日任务、反思记录、Journey、XP 和动动分别进入明确 Handler 与持久领域规则。
+  - step: "04"
+    title: Gemini 与确定性模板
+    description: Provider Route 可用时生成结构化 Draft；AI 被限流或不可用时，服务端模板继续保障新用户流程。
+  - step: "05"
+    title: 私网 PostgreSQL 与对象存储
+    description: Azure PostgreSQL 仅从 VM 私网访问；Cloudflare R2 提供兼容 S3 的媒体、备份与 Android 安装包存储。
+  - step: "06"
+    title: 从 Cloudflare Edge 到 Docker 服务
+    description: Cloudflare 终止 TLS，并通过 Tunnel 把请求交给仅监听 Loopback 的 Nginx，再路由到常驻 .NET Container，VM 不开放公网入站端口。
+results:
+  - 上线双语 Marketing Website、可用的 Web 产品与可下载 Android 预览版，而不是停留在本地 Prototype。
+  - 将产品从体育预测与评分转向更清晰的 AI 计划、每日进度、Journey 和宠物成长循环。
+  - 跑通从测试、Container Image、基础设施即代码、自动发布、Health Check 到稳定公开域名的可重复生产工作流。
+---
+
+## 产品方向
+
+Osprey Pulse 最初围绕体育数据、预测与社区评分展开。这个方向在技术上有探索价值，但没有形成足够强的持续使用理由。我把产品重新定位到一个更直接的承诺：**每天让一个重要目标向前一点**。
+
+现在的体验从用户用自己的话写下目标开始。AI 帮助把它整理成结构化计划，但每一部分都可以由用户检查和编辑。Today 提供当天的一小步；完成任务或打卡会积累进度；Journey 保存长期记录；用户的宠物伙伴动动也会随这些努力成长。宠物不是流程完成后附加的装饰，而是持续行动的反馈界面。
+
+首版刻意保持聚焦。一个进行中的目标比“管理整个人生”的 Dashboard 更容易理解；漏掉一天也不会惩罚用户或让宠物降级。好友和更丰富的分享已经进入产品方向，但当前上线核心仍是目标、计划、每日进度、私人历史和动动成长循环。
+
+## 从 AI 回答到持久计划
+
+AI 边界返回结构化计划数据，而不是让产品其他部分继续解析自然语言。Provider Route 管理模型、凭据、每分钟请求、每日用量、重试与冷却规则。Draft 可以先询问缺少的信息；只有用户检查确认后，计划才会成为持久数据。
+
+AI 失败被当作正常产品状态。无效 JSON、Rate Limit、Route 用尽或缺少 Provider 配置时，可以退回到服务端校验过的模板。这样既保证首次使用流程可用，也避免外部模型成为系统事实来源。
+
+## 契约、状态与历史
+
+C# API 发布 OpenAPI，前端 Monorepo 从同一来源生成 TypeScript 类型、Zod Schema 和 SDK，不维护另一套手写 DTO。ASP.NET Core 返回 RFC 9457 Problem Details，让 Web 与 Native 用一致方式展示字段错误和恢复操作。
+
+数据模型明确区分“可编辑的未来”和“不可改写的过去”。计划可以变化，但已完成日期保留当时的任务快照。XP 通过 Append-only Event 变化；任务完成、打卡和宠物互动使用 Idempotency Key，网络重试不会悄悄重复奖励进度。
+
+## 可迁移的生产链路
+
+公开前端运行在 Vercel。API 请求先到 Cloudflare Edge，再经 Cloudflare Tunnel 进入 Azure VM 上仅监听 Loopback 的 Nginx，最终到达 Docker 化的 ASP.NET Core 服务。VM 不开放公网应用入站端口，Azure PostgreSQL 也只使用私网访问。
+
+整个平台可以重复创建。OpenTofu 管理 Azure 与 Cloudflare 资源、DNS、Key Vault、Tunnel 和 R2 Bucket；Ansible 准备主机并部署 Compose Stack；GitHub Actions 构建 amd64 Image，以不可变 Commit SHA 推送 GHCR，通过 Cloudflare Access 发布，并 Smoke Test 公开 Health Endpoint。Docker Health Check、Autoheal、日志轮转与 Nginx Retry 让这台刻意保持轻量的 VM 仍能稳定运行。
+
+这个结构也没有把客户端锁死在某个 Compute Provider 上。API Hostname 保持稳定；免费 VM 不再合适时，Docker、Nginx、Tunnel、Ansible 与 Registry 可以一起迁移，Web 和 Mobile 不需要更换 Provider URL。
+
+## 当前已经上线的内容
+
+Marketing Website 与 Web 体验已在 `ospreypulse.com` 上线；下载页通过 `downloads.ospreypulse.com` 提供由 Cloudflare R2 承载的 Android 预览 APK。生产 API 暴露公开 Health Path，应用数据仍留在私有基础设施之后。
+
+当前上线版本没有把隐私友好型好友与分享功能放进关键路径，已交付体验始终聚焦目标、每日进度、私人历史与宠物陪伴循环。

@@ -110,7 +110,7 @@ That choice moved responsibility into the write path. The service had to update 
 
 Not every downstream update belonged in the user's request. ERP callbacks and transaction-status patches were placed on Bull queues backed by Redis. Workers handled the integration, logged failures, and could persist failed job metadata for operational review. A transfer service called a separate Go transport API behind a consistent adapter, including internal authentication and error mapping.
 
-This separation kept warehouse actions responsive and made dependency failures easier to isolate. It also exposed the next engineering steps clearly: correlation IDs across HTTP and queue jobs, explicit dead-letter and replay tooling, stronger idempotency contracts, and queue-age alerts.
+This separation kept warehouse actions responsive and made dependency failures easier to isolate. It also made the operational risks explicit: cross-boundary correlation, safe replay of failed jobs, idempotency contracts, and queue-age visibility.
 
 ## Technical decisions
 
@@ -122,6 +122,6 @@ This separation kept warehouse actions responsive and made dependency failures e
 
 **Treat operations as a product.** Validation, permissions, health checks, logs, failed-job visibility, and predictable error mapping were part of the workflow, not backend polish added after launch.
 
-## What I would strengthen today
+## Engineering perspective
 
-I would add OpenTelemetry correlation across the gateway, API, MongoDB, queues, and transfer calls; split liveness from readiness; document compound indexes against real query shapes; and provide dead-letter replay tooling with explicit owners. The underlying design remains useful: one clear inventory domain, thin transport layers, async side effects, and clients built around stable contracts.
+The underlying design remains useful: one clear inventory domain, thin transport layers, asynchronous side effects, and clients built around stable contracts. The main operational considerations are end-to-end telemetry, separate liveness and readiness, compound indexes verified against real query shapes, and controlled replay of failed jobs with clear ownership.

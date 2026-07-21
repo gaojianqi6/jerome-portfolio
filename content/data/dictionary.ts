@@ -117,7 +117,7 @@ export const homeProjects: Record<Locale, HomeProject[]> = {
       meta: "Pintec / Node.js, React, Mobile WebView, responsive web",
       role: "Node.js full-stack commerce project",
       body:
-        "Built a custom commerce platform for responsive web and mobile WebView. React storefront templates served campaigns and product flows while Node.js APIs supported catalog, orders, marketing configuration, analytics, and operations reporting.",
+        "Delivered a custom commerce platform for responsive web and mobile WebView. React storefront templates served campaigns and product flows while Node.js APIs supported catalog, orders, marketing configuration, analytics, and operations reporting.",
       proof: ["Web + mobile WebView", "React marketing templates", "Node.js commerce APIs"],
     },
     {
@@ -170,6 +170,15 @@ export const homeProjects: Record<Locale, HomeProject[]> = {
 export const homeSideProjects: Record<Locale, HomeProject[]> = {
   en: [
     {
+      name: "Osprey Pulse",
+      meta: "2026-present / ASP.NET Core, PostgreSQL, Gemini, Next.js, Expo",
+      role: "Independent full-stack product",
+      body:
+        "Live AI goal companion that turns a goal into an editable daily plan and lets users grow Ozzy, their pet companion, through daily progress. The web product, Android preview, .NET API, data model, tests, and infrastructure ship as one workflow.",
+      proof: ["Live web + Android preview", "AI planning + pet companion", "OpenTofu / Ansible delivery"],
+      slug: "osprey-pulse",
+    },
+    {
       name: "Mealway",
       meta: "2026 / ASP.NET Core, EF Core, PostgreSQL, Gemini, Azure",
       role: "Independent full-stack product",
@@ -179,25 +188,25 @@ export const homeSideProjects: Record<Locale, HomeProject[]> = {
       slug: "mealway",
     },
     {
-      name: "Osprey Pulse",
-      meta: "2026 / ASP.NET Core, GraphQL, EF Core, PostgreSQL, Next.js, Expo",
-      role: "Independent full-stack product",
-      body:
-        "Sports community and data platform with a modular GraphQL backend, screen-shaped queries, sports ingestion, shared web/mobile clients, and a community rating model.",
-      proof: ["GraphQL modular backend", "PostgreSQL domain model", "Web + mobile clients"],
-      href: "https://ospreypulse.com",
-    },
-    {
       name: "RateEverything",
       meta: "2025-present / Next.js, NestJS, FastAPI, PostgreSQL",
       role: "Independent full-stack product",
       body:
         "Cross-media rating platform with a Next.js user app, admin CMS, NestJS API, Python FastAPI admin service, shared PostgreSQL data model, tests, and CI/CD.",
       proof: ["Node.js + Python services", "Admin CRUD", "Shared PostgreSQL model"],
-      href: "https://rating.ospreypulse.com",
+      slug: "rate-everything",
     },
   ],
   zh: [
+    {
+      name: "Osprey Pulse",
+      meta: "2026 至今 / ASP.NET Core, PostgreSQL, Gemini, Next.js, Expo",
+      role: "独立全栈产品",
+      body:
+        "已上线的 AI 目标陪伴产品：把目标转成可编辑的每日计划，让用户的宠物伙伴动动随着每日进度一起成长。网站、Android 预览版、.NET API、数据、测试与基础设施已经形成一条完整发布链路。",
+      proof: ["网站 + Android 预览版", "AI 计划 + 宠物伙伴", "OpenTofu / Ansible 发布"],
+      slug: "osprey-pulse",
+    },
     {
       name: "Mealway",
       meta: "2026 / ASP.NET Core, EF Core, PostgreSQL, Gemini, Azure",
@@ -208,22 +217,13 @@ export const homeSideProjects: Record<Locale, HomeProject[]> = {
       slug: "mealway",
     },
     {
-      name: "Osprey Pulse",
-      meta: "2026 / ASP.NET Core, GraphQL, EF Core, PostgreSQL, Next.js, Expo",
-      role: "独立全栈产品",
-      body:
-        "体育社区和数据平台，包含模块化 GraphQL 后端、面向页面的查询、体育数据采集、共享 Web/移动端客户端和社区评分模型。",
-      proof: ["GraphQL 模块化后端", "PostgreSQL 领域模型", "Web + 移动端"],
-      href: "https://ospreypulse.com",
-    },
-    {
       name: "RateEverything",
       meta: "2025 至今 / Next.js, NestJS, FastAPI, PostgreSQL",
       role: "独立全栈产品",
       body:
         "跨媒体评分平台，包含 Next.js 用户端、后台 CMS、NestJS API、Python FastAPI 管理服务、共享 PostgreSQL 数据模型、测试和 CI/CD。",
       proof: ["Node.js + Python 服务", "后台 CRUD", "共享 PostgreSQL 模型"],
-      href: "https://rating.ospreypulse.com",
+      slug: "rate-everything",
     },
   ],
 };
@@ -298,14 +298,14 @@ export const stackRows = {
 
 export const experienceTimeline = {
   en: [
-    ["2025-present", "Independent full-stack products", "Mealway, Osprey Pulse and RateEverything across .NET, Node.js, Python, PostgreSQL and cloud delivery."],
+    ["2025-present", "Independent full-stack products", "Osprey Pulse, Mealway and RateEverything across .NET, Node.js, Python, PostgreSQL and cloud delivery."],
     ["2025", "Te Tawharau o te Whakatohea", "React Native + Supabase realtime Maori learning game."],
     ["2021-2023", "Carsome", "Public site, CMS micro-frontends, NestJS inventory service."],
     ["2017-2020", "Pintec", "Node.js + Express API/BFF, React web and React Native investment and commerce products."],
     ["2011-2016", "Full-stack foundations", "Node.js/Express, Java, PHP, MySQL, CMS, live streaming, WebRTC and mobile web."],
   ],
   zh: [
-    ["2025 至今", "独立全栈产品", "Mealway、Osprey Pulse、RateEverything，覆盖 .NET、Node.js、Python、PostgreSQL 和云交付。"],
+    ["2025 至今", "独立全栈产品", "Osprey Pulse、Mealway、RateEverything，覆盖 .NET、Node.js、Python、PostgreSQL 和云交付。"],
     ["2025", "Te Tawharau o te Whakatohea", "React Native + Supabase 实时 Maori 学习游戏。"],
     ["2021-2023", "Carsome", "官网、CMS 微前端、NestJS 库存服务。"],
     ["2017-2020", "Pintec", "Node.js + Express API/BFF、React Web 和 React Native 投资与电商产品。"],

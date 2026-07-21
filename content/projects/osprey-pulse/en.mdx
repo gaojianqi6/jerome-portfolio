@@ -1,0 +1,121 @@
+---
+title: Osprey Pulse
+slug: osprey-pulse
+locale: en
+subtitle: A live AI goal companion that turns one meaningful intention into an editable daily plan and lets users grow Ozzy, their pet companion, through daily progress.
+summary: I designed and shipped the product from its bilingual Next.js and Expo experiences through the ASP.NET Core API, structured AI planning, PostgreSQL model, automated tests, Android preview, and an OpenTofu- and Ansible-managed production path.
+client: Independent product
+kind: independent
+status: live
+timeframe: 2026 - Present
+role: Independent Full Stack Engineer and product owner
+featured: true
+order: 1
+categories:
+  - Full-stack
+  - AI product
+  - Cross-platform
+  - Infrastructure
+techStack:
+  - ASP.NET Core 10
+  - EF Core
+  - PostgreSQL
+  - Gemini
+  - Next.js 16
+  - Expo
+  - TypeScript
+  - OpenAPI
+  - Docker
+  - OpenTofu
+  - Ansible
+  - Cloudflare
+  - Azure
+links:
+  - label: Open Osprey Pulse
+    href: https://www.ospreypulse.com
+    type: live
+  - label: Download Android preview
+    href: https://www.ospreypulse.com/download
+    type: external
+hero:
+  src: /images/projects/osprey-pulse/osprey-home.png
+  alt: Osprey Pulse website showing an editable daily goal, progress, and Ozzy the pet companion
+  caption: The live product now leads with AI planning, goal growth, and companion-led motivation rather than sports prediction and ratings.
+  position: center top
+evidence:
+  - layer: Product
+    title: Goal-first web and mobile experience
+    description: Next.js and Expo present one clear loop—describe a goal, review a plan, complete today's step, and grow the pet companion Ozzy—in English and Simplified Chinese.
+  - layer: Contract
+    title: Generated client contracts
+    description: OpenAPI generates TypeScript types, Zod schemas, and the fetch SDK; RFC 9457 Problem Details gives every client a stable error vocabulary.
+  - layer: API
+    title: Clean Architecture .NET service
+    description: ASP.NET Core Minimal APIs keep HTTP thin while application handlers and domain entities own goals, plan versions, daily snapshots, check-ins, XP, Journey, and companion rules.
+  - layer: AI
+    title: Structured planning with fallback
+    description: Gemini routes return typed plan data under rate and usage controls; validated server templates remain available when a provider is unavailable or a response is invalid.
+  - layer: Data & quality
+    title: Durable progress and real PostgreSQL tests
+    description: EF Core migrations persist goals and append-only progress. Idempotent mutations protect XP, while xUnit, Testcontainers, and Respawn cover the API against PostgreSQL.
+  - layer: Delivery
+    title: Infrastructure and release as code
+    description: OpenTofu provisions Azure and Cloudflare resources, Ansible configures and deploys the VM stack, GitHub Actions publishes GHCR images, and R2 serves product media including the Android preview.
+architecture:
+  - step: "01"
+    title: Next.js web and Expo mobile
+    description: Platform-specific interfaces share design tokens, localization, API infrastructure, query state, and generated contracts without forcing web UI onto native.
+  - step: "02"
+    title: Versioned REST contract
+    description: A generated OpenAPI client carries authenticated requests through stable /api/v1 endpoints and turns typed errors into recoverable UI states.
+  - step: "03"
+    title: ASP.NET Core application and domain
+    description: Identity, plan generation, daily tasks, reflections, Journey, XP, and Ozzy are separated into explicit handlers and durable domain rules.
+  - step: "04"
+    title: Gemini plus deterministic templates
+    description: Provider routes create structured drafts when available; server-owned templates keep the onboarding path useful when AI is rate-limited or unavailable.
+  - step: "05"
+    title: Private PostgreSQL and object storage
+    description: Azure PostgreSQL is reachable privately from the VM, while Cloudflare R2 provides S3-compatible storage for media, backups, and the downloadable Android build.
+  - step: "06"
+    title: Cloudflare edge to the Docker service
+    description: Cloudflare terminates TLS and carries requests through a Tunnel to loopback-only Nginx, which routes to the long-running .NET container without public inbound VM ports.
+results:
+  - Shipped a public bilingual marketing website, functional web product, and downloadable Android preview rather than stopping at a local prototype.
+  - Reframed the product from sports prediction and rating into a clearer AI planning, daily progress, Journey, and companion-growth loop.
+  - Proved a repeatable production workflow across tests, container images, infrastructure as code, automated deployment, health checks, and stable public domains.
+---
+
+## The product direction
+
+Osprey Pulse began around sports data, prediction, and community ratings. That direction produced a technically interesting system, but it did not create a strong reason for people to return. I repositioned the product around a more useful promise: **move one meaningful goal a little every day**.
+
+The current experience starts with a goal in the user's own words. AI helps turn it into a structured plan, but the user can review and edit every part. Today presents a small next step; completing tasks or checking in earns progress; Journey preserves the history; and Ozzy, the user's pet companion, grows with that effort. The pet is not decoration added after the workflow—it is the feedback surface for consistency.
+
+The launch scope deliberately stays focused. One active goal is easier to understand than a life-management dashboard, and missed days do not punish or downgrade the companion. Social and richer sharing ideas exist in the product direction, but the live core is the goal, plan, daily progress, private history, and Ozzy loop.
+
+## From AI answer to durable plan
+
+The AI boundary returns structured plan data rather than prose that the rest of the product has to interpret. Provider routes carry model, credential, request-per-minute, daily-usage, retry, and cooldown rules. A draft can ask for missing information before it proposes the plan, and confirmed data is saved only after the user reviews it.
+
+AI failure is treated as a normal product state. Invalid JSON, rate limits, exhausted routes, or missing provider configuration can fall back to validated server templates. This keeps the first-use path available and prevents an external model from becoming the system of record.
+
+## Contracts, state, and history
+
+The C# API publishes OpenAPI. The frontend monorepo generates TypeScript types, Zod schemas, and its SDK from that source instead of maintaining parallel handwritten DTOs. ASP.NET Core returns RFC 9457 Problem Details, so web and native clients can display field errors and recovery actions consistently.
+
+The data model distinguishes an editable future from an immutable past. Plans can evolve, but a completed day keeps its task snapshot. XP changes are append-only, and task completion, check-in, and companion interactions use idempotency keys so a retry cannot silently award progress twice.
+
+## A production path designed to move
+
+The public frontend runs on Vercel. API traffic reaches Cloudflare's edge, passes through a Cloudflare Tunnel to loopback-only Nginx on an Azure VM, and then reaches the Dockerised ASP.NET Core service. The VM exposes no public inbound application ports, and Azure PostgreSQL uses private network access.
+
+The platform is reproducible. OpenTofu manages the Azure and Cloudflare resources, DNS, Key Vault, Tunnel, and R2 buckets. Ansible prepares the host and deploys the Compose stack. GitHub Actions builds amd64 images, publishes immutable SHA tags to GHCR, deploys through Cloudflare Access, and smoke-tests the public health endpoint. Docker health checks, auto-heal, log rotation, and Nginx retry rules keep the deliberately small host practical.
+
+This shape also avoids coupling the clients to one compute provider. The API hostname stays stable, and Docker, Nginx, the Tunnel, Ansible, and the image registry can move together when the free-tier VM is no longer the right host.
+
+## What is live now
+
+The marketing site and web experience are live at `ospreypulse.com`. The download page serves an Android preview APK from `downloads.ospreypulse.com`, backed by Cloudflare R2. The production API has a public health path, while the application data remains behind private infrastructure.
+
+The live release keeps privacy-aware friend and sharing features outside the critical path. The shipped experience stays centred on the goal, daily progress, private history, and pet-companion loop.

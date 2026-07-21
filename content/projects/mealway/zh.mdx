@@ -10,7 +10,7 @@ status: live
 timeframe: 2026 年 4 月至今
 role: 独立 Full Stack Engineer 与产品负责人
 featured: true
-order: 3
+order: 2
 categories:
   - 全栈
   - .NET
@@ -119,6 +119,6 @@ Serilog 输出结构化请求与应用事件。Azure Container Apps 提供 Reque
 
 **测试强度跟随风险。** Domain Rule 与 Application Service 使用 Unit Test；鉴权、计划、清单、菜谱与 AI 错误行为使用真实 HTTP + PostgreSQL Integration Test。
 
-## 下一步
+## 扩展边界
 
-当 API 扩展到多个 Replica 后，下一步是分布式 Rate Limit；随后增加 AI 成本预算、从客户端贯穿 Gemini Call 的 Request Correlation，以及针对持续 5xx 或 Model Fallback Exhaustion 的生产告警。产品可以在不削弱计划与购物清单核心的前提下继续扩展价格比较和餐厅发现。
+当前上线 API 使用刻意保持轻量的生产策略。扩展到多个 Replica 会改变可靠性边界：Rate Limit 必须改为分布式，AI 调用需要明确成本预算，Request Correlation 需要贯穿 Gemini Call，并针对持续 5xx 或 Model Route Exhaustion 建立告警。计划与购物清单领域保持与这些基础设施选择解耦。

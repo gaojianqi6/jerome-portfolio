@@ -10,7 +10,7 @@ status: live
 timeframe: 2025 年 2 月至今
 role: 独立 Full Stack Engineer 与产品负责人
 featured: false
-order: 4
+order: 3
 categories:
   - 全栈
   - Node.js
@@ -84,6 +84,6 @@ NestJS 服务负责主要产品契约，并使用 Prisma 访问关系数据。Fa
 
 Jest 覆盖服务逻辑，Cypress 覆盖关键浏览器路径。公开网站部署在 Vercel，`rating.ospreypulse.com/api` 下的请求被代理到 GCP Cloud Run 上的 NestJS API，PostgreSQL 独立托管。稳定公开路径避免把 Cloud Provider URL 暴露为客户端契约。
 
-## 下一步加强方向
+## 工程边界
 
-下一步是增加 Prisma 与 SQLModel 之间的 Schema Compatibility Check、更完整的审核 Audit Event，以及覆盖 Proxy 边界的 Contract Test。推荐功能成为主要卖点前，也需要先建立更清晰的推荐效果评估方法。
+服务拆分让三个工程边界尤其重要：Prisma 与 SQLModel 之间的 Schema Compatibility、可审计的审核事件，以及公开 Proxy 边界的 Contract Coverage。推荐功能保持为范围明确的实验，只有具备清晰的产品证据时才会成为核心主张。

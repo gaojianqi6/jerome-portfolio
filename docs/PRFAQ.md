@@ -10,7 +10,7 @@
 
 很多工程师的个人网站只回答了“我会什么技术”，却没有回答“我能解决什么问题、如何思考产品、如何把复杂系统做成用户能用的体验”。全栈能力尤其难展示：后端架构、数据库设计、测试、部署、业务建模通常隐藏在界面背后。Jerome Portfolio 的目标不是简单“展示前端能力”，而是用优秀的视觉设计、清晰的信息架构、可维护的前端结构和深度 case study，把这些隐藏能力变成访问者可以理解、可以验证、可以讨论的证据。
 
-网站首屏会直接呈现 Jerome 的市场定位：Senior Full Stack Engineer with product-minded frontend craft。页面不把“多年经验”当作唯一卖点，而是把能力证据产品化：Carsome 的高性能响应式官网与 CMS 微前端、Te Kemu Arapū 的 React Native 实时多人游戏、RateEverything 的 Next.js / NestJS / FastAPI 全栈评分平台、Osprey Pulse 与 Mealway 这类持续迭代的跨端产品，都被重构为可浏览的 case study。每个 case study 不只列技术栈，还回答业务背景、用户场景、关键难点、我的角色、设计取舍、前端结构、后端边界、工程质量和最终结果。
+网站首屏会直接呈现 Jerome 的市场定位：Senior Full Stack Engineer with product-minded frontend craft。页面不把“多年经验”当作唯一卖点，而是把能力证据产品化：Carsome 的高性能响应式官网与 CMS 微前端、Te Kemu Arapū 的 React Native 实时多人游戏、RateEverything 的 Next.js / NestJS / FastAPI 全栈评分平台，以及主推的 Osprey Pulse——一个已上线、可下载 Android 预览版，并通过 AI 计划、目标成长和宠物陪伴形成日常循环的跨端产品。Mealway 继续作为第二个独立产品案例。每个 case study 不只列技术栈，还回答业务背景、用户场景、关键难点、我的角色、设计取舍、前端结构、后端边界、工程质量和最终结果。
 
 “我希望别人看到的不只是我做过什么，而是我如何把不清晰的问题变成可交付的产品。”Jerome Gao 表示，“全栈能力很难只靠页面截图展示，所以 Portfolio 本身必须有好的设计判断和前端结构：信息架构、响应式布局、可访问性、交互动效、性能、内容模型、组件组织和双语表达，都必须体现在这个网站里。”
 

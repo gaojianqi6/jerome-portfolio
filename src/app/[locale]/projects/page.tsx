@@ -15,8 +15,8 @@ const copy = {
     professionalBody: "Products delivered inside engineering teams, with contribution boundaries stated in each case study.",
     independent: "Independent products",
     independentBody: "Products where I own the path from backend and data to clients, deployment, and operations.",
-    additional: "Additional work",
-    additionalBody: "A compact record of other relevant product work. Deeper case studies will be added when there is enough evidence to make them useful.",
+    additional: "Other projects",
+    additionalBody: "Additional shipped product work across commerce and realtime mobile experiences.",
     read: "Read case study",
   },
   zh: {
@@ -28,7 +28,7 @@ const copy = {
     independent: "独立产品",
     independentBody: "从后端、数据到客户端、部署与运行均由我持续负责的产品。",
     additional: "其他项目",
-    additionalBody: "保留一份紧凑的相关工作记录；有足够证据后，再补成有价值的完整案例。",
+    additionalBody: "其他已交付项目，覆盖电商系统与实时移动体验。",
     read: "查看案例",
   },
 } as const;
@@ -37,10 +37,10 @@ const additionalProjects = {
   en: [
     {
       name: "Buy It Mall / GouTa Mall",
-      period: "Pintec",
+      period: "Pintec / Shipped, now offline",
       role: "Node.js full-stack commerce",
       stack: "Node.js, Express, MySQL, React, mobile WebView",
-      summary: "Custom commerce flows across responsive web and embedded mobile clients, backed by catalog, order, campaign, analytics, and operations APIs.",
+      summary: "Delivered a custom commerce platform across responsive web and embedded mobile clients, backed by catalog, order, campaign, analytics, and operations APIs.",
     },
     {
       name: "Te Kemu Arapu",
@@ -49,22 +49,14 @@ const additionalProjects = {
       stack: "React Native, Expo, Supabase, PostgreSQL",
       summary: "A Te Reo Maori learning game with rooms, realtime turns, game state, scoring, and single-player and multiplayer flows.",
     },
-    {
-      name: "Osprey Pulse",
-      period: "2026-present",
-      role: "Independent full-stack product",
-      stack: "ASP.NET Core, PostgreSQL, Next.js, Expo",
-      summary: "A current web and mobile product with a typed .NET API, identity, relational data, observability, and shared cross-platform product work.",
-      href: "https://ospreypulse.com",
-    },
   ],
   zh: [
     {
       name: "购它商城 / Buy It Mall",
-      period: "Pintec",
+      period: "Pintec / 已交付，现已下线",
       role: "Node.js 全栈电商项目",
       stack: "Node.js, Express, MySQL, React, Mobile WebView",
-      summary: "覆盖响应式网站与移动端嵌入页面的定制电商流程，后端支撑商品、订单、活动、数据分析和运营接口。",
+      summary: "交付覆盖响应式网站与移动端 WebView 的定制电商平台，后端支撑商品、订单、活动、数据分析和运营接口。",
     },
     {
       name: "Te Kemu Arapu",
@@ -72,14 +64,6 @@ const additionalProjects = {
       role: "Full Stack Engineer",
       stack: "React Native, Expo, Supabase, PostgreSQL",
       summary: "Te Reo Maori 学习游戏，包含房间、实时回合、游戏状态、积分，以及单人和多人流程。",
-    },
-    {
-      name: "Osprey Pulse",
-      period: "2026 至今",
-      role: "独立全栈产品",
-      stack: "ASP.NET Core, PostgreSQL, Next.js, Expo",
-      summary: "持续开发中的 Web 与移动产品，包含类型化 .NET API、身份认证、关系数据、可观测性和跨端产品交付。",
-      href: "https://ospreypulse.com",
     },
   ],
 } as const;
@@ -162,13 +146,7 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
             <article key={project.name}>
               <div>
                 <small>{project.period}</small>
-                <h3>
-                  {"href" in project ? (
-                    <a href={project.href} target="_blank" rel="noreferrer noopener">
-                      {project.name}<ArrowUpRight size={17} />
-                    </a>
-                  ) : project.name}
-                </h3>
+                <h3>{project.name}</h3>
                 <p>{project.role}</p>
               </div>
               <p>{project.summary}</p>

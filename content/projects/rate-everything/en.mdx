@@ -10,7 +10,7 @@ status: live
 timeframe: Feb 2025 - Present
 role: Independent Full Stack Engineer and product owner
 featured: false
-order: 4
+order: 3
 categories:
   - Full-stack
   - Node.js
@@ -84,6 +84,6 @@ The NestJS service owns the main product contract and uses Prisma for relational
 
 Jest covers service logic and Cypress covers important browser paths. The public site is deployed on Vercel. Requests under `rating.ospreypulse.com/api` are proxied to the NestJS API on GCP Cloud Run, with PostgreSQL hosted separately. Stable public paths keep provider URLs out of the browser-facing contract.
 
-## What I would strengthen next
+## Engineering boundaries
 
-The next step is stronger schema-compatibility checks between Prisma and SQLModel, richer moderation audit events, and contract tests around the proxy boundary. The product also needs clearer recommendation evaluation before recommendation features become a central claim.
+The service split makes three engineering boundaries especially important: schema compatibility between Prisma and SQLModel, auditable moderation events, and contract coverage around the public proxy. Recommendation features remain a scoped experiment unless their quality can be evaluated with clear product evidence.

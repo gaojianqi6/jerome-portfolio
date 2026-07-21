@@ -407,7 +407,7 @@ type MediaAsset = {
 | RateEverything | Next.js + React + TypeScript + Zustand + NestJS + FastAPI，展示从 UI、状态、API 到数据模型的独立交付 |
 | Te Kemu Arapū | React Native + Expo + Supabase realtime，证明跨端和实时交互能力 |
 | Carsome | 大型业务、SSR、微前端、组件库、性能优化，证明企业级经验 |
-| Osprey Pulse | Next.js + Expo + GraphQL + .NET，证明当前技术探索和产品野心 |
+| Osprey Pulse | AI 目标陪伴 + Next.js/Expo + ASP.NET Core + PostgreSQL + OpenTofu/Ansible，证明从产品方向、跨端体验到生产基础设施的完整交付 |
 | Mealway | AI meal planning + Next.js/Expo + ASP.NET Core，证明 AI 产品和现代工程实践 |
 
 ## 14. V1 验收标准

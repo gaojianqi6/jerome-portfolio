@@ -110,7 +110,7 @@ MongoDB 符合主要读取模式：运营人员通常需要知道一辆车现在
 
 并不是每个下游更新都应该让用户等待。ERP 回调和交易状态更新进入 Redis 支撑的 Bull Queue，由 Worker 执行集成、记录失败，并在需要时保存失败任务信息供运营排查。Transfer Service 通过统一 Adapter 调用独立的 Go Transport API，包含内部鉴权和错误映射。
 
-这种拆分让仓库操作保持响应，也让依赖故障更容易隔离。它同时暴露出下一步改进方向：HTTP 与 Queue Job 之间贯通 Correlation ID、明确的 Dead Letter 和 Replay 工具、更严格的幂等契约，以及 Queue Age 告警。
+这种拆分让仓库操作保持响应，也让依赖故障更容易隔离，同时把跨边界追踪、失败任务安全重放、幂等契约和 Queue Age 可见性等运行风险明确下来。
 
 ## 关键技术决策
 
@@ -122,6 +122,6 @@ MongoDB 符合主要读取模式：运营人员通常需要知道一辆车现在
 
 **把内部运营也当成产品。** 校验、权限、健康检查、日志、失败任务可见性和稳定错误映射不是上线后的修饰，而是工作流的一部分。
 
-## 现在会如何加强
+## 工程视角
 
-我会补充贯穿 Gateway、API、MongoDB、Queue 与 Transfer Call 的 OpenTelemetry；拆分 Liveness 与 Readiness；根据真实查询模式记录并验证组合索引；为失败任务提供有责任人和审计记录的 Replay 工具。核心方向仍然有效：清晰的库存领域、轻薄的传输层、异步副作用和稳定客户端契约。
+核心方向仍然有效：清晰的库存领域、轻薄的传输层、异步副作用和稳定客户端契约。主要运行关注点包括贯穿 Gateway、API、MongoDB、Queue 与 Transfer Call 的 Telemetry，独立的 Liveness 与 Readiness，根据真实查询模式验证的组合索引，以及有明确责任人与审计记录的失败任务 Replay。

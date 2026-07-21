@@ -129,6 +129,6 @@ Express 作为 API/BFF 边界，鉴别自有或合作方调用者，校验输入
 
 **金融事实留在服务端。** 客户端计算可以辅助展示，但组合、KYC 和操作状态必须以后端服务和 MySQL 为准。
 
-## 现在会如何加强
+## 工程视角
 
-我会采用端到端 TypeScript Contract 或 Schema Generation、RFC 9457 Problem Details、显式 Idempotency Key、更强的 MySQL Transaction Integration Test，以及贯穿 Express、数据库、缓存与算法调用的 OpenTelemetry。我仍会保留原来的核心选择：共享领域行为、平台原生展示，以及能够服务自有代码之外客户端的稳定后端契约。
+原来的架构选择依然成立：共享领域行为、平台原生展示，以及能够服务自有代码之外客户端的稳定后端契约。在现代实现中，同样的边界可以自然对应到生成式 TypeScript Contract、RFC 9457 Problem Details、显式 Idempotency Key、MySQL Transaction Integration Test，以及贯穿 Express、存储、缓存与算法调用的 Telemetry。
