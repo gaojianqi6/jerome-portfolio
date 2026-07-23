@@ -5,7 +5,6 @@ import { useEffect } from "react";
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
-    plausible?: (event: string, options?: { props?: Record<string, string> }) => void;
   }
 }
 
@@ -20,7 +19,6 @@ export function Analytics() {
       if (!eventName) return;
 
       const props = label ? { label } : undefined;
-      window.plausible?.(eventName, { props });
       window.gtag?.("event", eventName, props);
     }
 
